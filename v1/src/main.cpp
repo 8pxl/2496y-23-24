@@ -10,8 +10,8 @@ bool color;
 
 void initialize() 
 {	glb::imu.reset();
-	auton = autons.autonsList[robot::controller.select(autons.names)];	
-	color = robot::controller.select({"blue", "red"}); //0 = blue, 1 = red
+	// auton = autons.autonsList[robot::controller.select(autons.names)];	
+	// color = robot::controller.select({"blue", "red"}); //0 = blue, 1 = red
 }
 
 void autonomous() {auton();}

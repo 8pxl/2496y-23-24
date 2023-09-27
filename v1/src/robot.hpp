@@ -3,18 +3,21 @@
 #include "main.h"
 #include "keejLib/lib.hpp"
 
-namespace glb
-{
+namespace glb {
     //pros
     pros::Imu imu(9);
+    pros::ADIDigitalOut ipis('E');
+    pros::ADIDigitalOut wpis1('B');
+    pros::ADIDigitalOut wpis2('D');
     pros::Controller controller(pros::E_CONTROLLER_MASTER);
 }
 
-namespace robot
-{
-    lib::diffy chassMtrs({1, 2, 3, 4, 5, 6});
-    lib::mtrs intake({7});
-    lib::mtrs cata({8});
+namespace robot {
+    lib::diffy chassMtrs({-14, -6, -3, 17, 5, 10});
+    lib::mtrs intake({12});
+    lib::mtrs cata({20});
+    lib::pis tsukasa({glb::ipis}, false);
+    lib::pis wings({glb::wpis1, glb::wpis2}, false);
     lib::controller controller(glb::controller);
     lib::chassis chass
     (
