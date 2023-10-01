@@ -19,8 +19,7 @@ namespace robot {
     lib::pis tsukasa({glb::ipis}, false);
     lib::pis wings({glb::wpis1, glb::wpis2}, false);
     lib::controller controller(glb::controller);
-    lib::chassis chass
-    (
+    lib::chassis chass (
         chassMtrs, 
         glb::imu, 
         {6, 8}, 

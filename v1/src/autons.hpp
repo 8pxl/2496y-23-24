@@ -5,8 +5,7 @@ using namespace robot;
 using namespace lib;
 
 //example turn constants
-pidConstants ninety
-{
+pidConstants ninety {
     .p = 5.9, 
     .i = 0.6, 
     .d = 70, 
@@ -15,8 +14,7 @@ pidConstants ninety
     .maxIntegral = 20
 }; 
 
-pidConstants fortyfive
-{
+pidConstants fortyfive {
     .p = 5.9, 
     .i = 0.6, 
     .d = 70, 
@@ -26,20 +24,17 @@ pidConstants fortyfive
 }; 
 
 
-void test1()
-{
+void test1() {
     chass.profiledDrive(10, 100);
 }
 
-void test2()
-{
+void test2() {
     chass.pidTurn(90, 1500, ninety);
     chass.pidTurn(45, 1500, fortyfive);
 }
 
 //creates list of auton function pointers and names - useful for auton selector
-lib::atns autons = 
-{
+lib::atns autons = {
     {test1, test2}, 
     {"test", "test2"}
 };
