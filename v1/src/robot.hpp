@@ -1,6 +1,7 @@
 #pragma once
 
 #include "main.h"
+#include "cata.hpp"
 #include "keejLib/lib.hpp"
 
 namespace glb {
@@ -36,6 +37,7 @@ namespace robot {
             .velToVolt = 0
         }
     );
+    cata::cata cataMachine(&mtrs, &glb::limit);
 }
 
 
