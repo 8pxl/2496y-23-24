@@ -17,6 +17,7 @@ void initialize() {
 void autonomous() {auton();}
 
 void opcontrol() {
+	robot::controller.setCurves(0, 4);
 	while (true) 
 	{
 		driver();

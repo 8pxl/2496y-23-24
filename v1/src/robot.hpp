@@ -6,18 +6,19 @@
 namespace glb {
     //pros
     pros::Imu imu(9);
-    pros::ADIDigitalOut ipis('E');
     pros::ADIDigitalOut wpis1('G');
     pros::ADIDigitalOut wpis2('H');
-    pros::ADIButton limit('A');
+    pros::ADIDigitalOut spis('F');
+    pros::ADIButton limit('C');
     pros::Controller controller(pros::E_CONTROLLER_MASTER);
 }
 
 namespace robot {
     lib::diffy chassMtrs({-2, -3, -1, 9, 6, 10});
-    lib::mtrs intake({8});
-    lib::mtrs cata({5});
-    lib::pis tsukasa({glb::ipis}, false);
+    lib::mtrs intake({-5});
+    lib::mtrs blocker({-20});
+    lib::mtrs cata({-8});
+    lib::pis scraper({glb::spis}, false);
     lib::pis wings({glb::wpis1, glb::wpis2}, false);
     lib::controller controller(glb::controller);
     lib::chassis chass (
