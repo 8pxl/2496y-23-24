@@ -11,6 +11,7 @@ namespace glb {
     pros::ADIDigitalOut spis('F');
     pros::ADIButton limit('C');
     pros::Controller controller(pros::E_CONTROLLER_MASTER);
+    pros::Rotation rot(15);
 }
 
 namespace robot {

@@ -3,8 +3,10 @@
 using namespace glb;
 using namespace robot;
 
+
 namespace cata {
 
+    constexpr int full = 270                                                      ;
     enum cataState {
         firing,
         reloading,
@@ -14,29 +16,39 @@ namespace cata {
     };
     
     cataState state = idle;
-    lib::timer t1;
-    lib::timer t2;
+    int target;
+    double kp = 0.5;
+
+    void calibrate() {
+        lib::timer t1;
+        while (t1.time() < 1300) {
+            robot::cata.spin(-10);
+        }
+        glb::rot.reset_position();
+        pros::delay(300);
+        robot::cata.stop('c');
+    }
 
     void cataControl() {
         // std::cout << limit.get_value() << std::endl;
+        int angle = rot.get_angle();
         switch (state) {
             case firing:
-                if (limit.get_value()) {
+                if (angle < (full + 10)) {
                     robot::cata.spin(-127);
                 }
                 else {
-                    t2.reset();
                     state = reloading;
                 }
                 break;
 
             case reloading:
-                if(!limit.get_value()) {
-                    if (t2.time() < 430) {
+                if(angle < full || (angle > (full + 10) && angle < 36000)) {
+                    if (fmod(angle, full) < full/2) {
                         robot::cata.spin(-127);
                     }
                     else {
-                        robot::cata.spin(-70);
+                        robot::cata.spin(kp * (full - angle));
                     }
                 }
                 else {
@@ -49,10 +61,7 @@ namespace cata {
                 break;
 
             case half:
-                if (limit.get_value()) {
-                    t1.reset();
-                }
-                if (t1.time() < 450) {
+                if(angle < full/2) {
                     robot::cata.spin(-127);
                 }
                 else {
@@ -67,12 +76,10 @@ namespace cata {
     }
 
     void halfway() {
-        t1.reset();
         state = half;
     }
 
     void fire() {
-        t2.reset();
         state = firing;
     }
 
