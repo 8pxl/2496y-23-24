@@ -11,11 +11,13 @@ namespace cata {
         half,
         idle,
         toggeled,
+        delayed,
     };
     
     cataState state = idle;
     lib::timer t1;
     lib::timer t2;
+    lib::timer delay;
 
     void cataControl() {
         // std::cout << limit.get_value() << std::endl;
@@ -26,18 +28,20 @@ namespace cata {
                 }
                 else {
                     t2.reset();
-                    state = reloading;
+                    delay.reset();
+                    state = delayed;
                 }
                 break;
 
             case reloading:
+                std::cout << robot::cata.getEfficiency() << std::endl;
                 if(!limit.get_value()) {
-                    if (t2.time() < 430) {
+                    // if (t2.time() < 430) {
                         robot::cata.spin(-127);
-                    }
-                    else {
-                        robot::cata.spin(-70);
-                    }
+                    // }
+                    // else {
+                    //     robot::cata.spin(-70);
+                    // }
                 }
                 else {
                     robot::cata.stop('c');
@@ -63,6 +67,13 @@ namespace cata {
 
             case toggeled: 
                 robot::cata.spin(-127);
+                break;
+            case delayed:
+                if (delay.time() < 300) robot::cata.stop('b');
+                else {
+                    state = reloading;
+                }
+                break;
         }
     }
 
