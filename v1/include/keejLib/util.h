@@ -40,7 +40,8 @@ namespace lib
 
     struct pidConstants{double p,i,d,tolerance,integralThreshold, maxIntegral;};
 
-    struct robotConstants{double horizTrack, vertTrack, trackDia, maxSpeed, fwdAccel, fwdDecel, revAccel, revDecel, velToVolt;};
+    struct robotConstants{double horizTrack, vertTrack, trackDia;};
+    struct accelConstants{double maxSpeed, fwdAccel, fwdDecel, revAccel, revDecel, velToVolt;};
     //distance per 10 ms to motor volt
     struct atns{std::vector<fptr> autonsList; std::vector<std::string> names; };
 
