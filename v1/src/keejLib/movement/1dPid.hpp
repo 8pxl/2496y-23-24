@@ -17,12 +17,45 @@ lib::pid lib::chassis::pidTurn(double target, double timeout, lib::pidConstants 
   lib::pid pidController(constants, target);
   while(timer.time() < timeout)
   {
-    double vel = pidController.out(lib::minError(target, imu -> get_heading()));
-    chass -> spinDiffy(vel, -vel);
+    double temp = lib::minError(target, imu -> get_heading());
+    if(fmod(timer.time(), 100) == 0) std::cout << temp << std::endl;
+    double vel = pidController.out(temp);
+    chass -> spinDiffy(-vel, vel);
+    pros::delay(10);
   }
   chass -> stop(brake);
   return (pidController);
 }
+
+// lib::pid lib::chassis::keejTurn(double target, int timeout, lib::pidConstants constants, char brake = 'b')
+// {
+//   lib::timer timer;
+//   lib::pid pidController(constants, target);
+//   int state = 1;
+//   double vel = 0;
+//   while (timer.time() < timeout)
+//   {
+//     double error = lib::minError(target, imu -> get_heading());
+//     switch (state) {
+//       case 1:
+//         if (vel >= angular.maxSpeed) {
+//           vel = angular.maxSpeed;
+//           state = 2;
+//         }
+//       case 2:
+        
+//       case 3:
+//     }
+//   }
+//   return pidController;
+//   /*
+//     thought process,
+//     split it into three states. 
+//     case 1: if there is distance to deccelerate from current velocity, accelerate, if current velocity exceeds the max, set it to the max
+//     case 2: if there isn't distance to deccelerate from current velocity, then decelerate otherwise max. 
+//     case 3: decelerate, pid correction aat the very end
+//   */
+// }
 
 lib::pid lib::chassis::pidDrive(double target, double timeout, char brake, lib::pid cont)
 {
