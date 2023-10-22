@@ -3,17 +3,22 @@
 #include "main.h"
 #include "keejLib/lib.hpp"
 
+#define MAX_LIN 0.647953484803
+#define MAX_ANG 0.796332147963
+
 namespace glb {
     //pros
-    pros::Imu imu(9);
-    pros::ADIDigitalOut wpis1('G');
+    pros::Imu imu(12);
+    pros::ADIDigitalOut wpis1('B');
     pros::ADIDigitalOut wpis2('H');
-    pros::ADIDigitalOut spis('F');
-    pros::ADIButton limit('C');
+    pros::ADIDigitalOut spis('C');
+    pros::ADIButton limit('G');
     pros::Controller controller(pros::E_CONTROLLER_MASTER);
     pros::Rotation rot(15);
 }
 
+//https://www.desmos.com/calculator/zwl4noapxl
+//math for robot constants
 namespace robot {
     lib::diffy chassMtrs({-2, -3, -1, 9, 6, 10});
     lib::mtrs intake({-5});
@@ -25,17 +30,24 @@ namespace robot {
     lib::chassis chass (
         chassMtrs, 
         glb::imu, 
-        {6, 8}, 
-        {
-            .horizTrack = 0, 
+        {6, 8}, {
+            .horizTrack = 5.53532 + 5.25712, 
             .vertTrack = 0,
             .trackDia = 0,
-            .maxSpeed = 0,
-            .fwdAccel = 0,
-            .fwdDecel =  0,
-            .revAccel =  0,
-            .revDecel = 0,
-            .velToVolt = 0
+        }, {
+            .maxSpeed = MAX_LIN,
+            .fwdAccel = MAX_LIN / 18,
+            .fwdDecel = MAX_LIN / 18,
+            .revAccel = MAX_LIN / 18,
+            .revDecel = MAX_LIN / 18,
+            .velToVolt = 196.001723856
+        }, {
+            .maxSpeed = MAX_ANG,
+            .fwdAccel = MAX_ANG / 40,
+            .fwdDecel =  MAX_ANG / 40,
+            .revAccel =  MAX_ANG / 20,
+            .revDecel = MAX_ANG / 20,
+            .velToVolt = 127 / MAX_ANG
         }
     );
 }

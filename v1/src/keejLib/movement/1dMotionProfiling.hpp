@@ -41,12 +41,30 @@ void lib::chassis::profiledDrive(double target, int endDelay = 500)
   int sign = lib::sign(target);
   target = fabs(target);
   std::vector<double> profile;
-  if(sign > 0) profile = asymTrapezoidalProfile(target, constants.maxSpeed, constants.fwdAccel, constants.fwdDecel);
-  else profile = asymTrapezoidalProfile(target, constants.maxSpeed, constants.revAccel, constants.revDecel);
+  // std::cout << "reached 1" << std::endl;
+  if(sign > 0) profile = asymTrapezoidalProfile(target, linear.maxSpeed, linear.fwdAccel, linear.fwdDecel);
+  else profile = asymTrapezoidalProfile(target, linear.maxSpeed, linear.revAccel, linear.revDecel);
   chass -> reset();
   for (int i = 0; i < profile.size(); i++)
   {
-    chass -> spin(profile[i] * constants.velToVolt * sign);
+    chass -> spin(profile[i] * linear.velToVolt * sign);
+    pros::delay(10);
+  }
+  chass -> stop('b');
+  pros::delay(endDelay);
+}
+
+void lib::chassis::profiledTurn(double target, int dir, int endDelay = 500)
+{
+  //kv: rpm -> voltage
+  //sf: in/ms -> rpm
+  std::vector<double> profile = asymTrapezoidalProfile(target, angular.maxSpeed, angular.fwdAccel,  angular.fwdDecel);
+  chass -> reset();
+  std::cout << profile.size() << std::endl;
+  for (int i = 0; i < profile.size(); i++)
+  {
+    double vel = profile[i] * angular.velToVolt * dir;
+    chass -> spinDiffy(vel, -vel);
     pros::delay(10);
   }
   chass -> stop('b');

@@ -13,6 +13,7 @@ namespace cata {
         half,
         idle,
         toggeled,
+        delayed,
     };
     
     cataState state = idle;
@@ -72,6 +73,13 @@ namespace cata {
 
             case toggeled: 
                 robot::cata.spin(-127);
+                break;
+            case delayed:
+                if (delay.time() < 300) robot::cata.stop('b');
+                else {
+                    state = reloading;
+                }
+                break;
         }
     }
 
