@@ -5,8 +5,9 @@ using namespace robot;
 
 
 namespace cata {
+    constexpr double halfPos = 17499;
+    constexpr double load = 17300;
 
-    constexpr int full = 270                                                      ;
     enum cataState {
         firing,
         reloading,
@@ -18,43 +19,58 @@ namespace cata {
     
     cataState state = idle;
     int target;
-    double kp = 0.5;
+    double kp = 0.7;
+    lib::timer delay;
+    lib::timer inRange;
 
     void calibrate() {
-        lib::timer t1;
-        while (t1.time() < 1300) {
-            robot::cata.spin(-10);
-        }
-        glb::rot.reset_position();
-        pros::delay(300);
-        robot::cata.stop('c');
+        // lib::timer t1;
+        // while (t1.time() < 1600) {
+        //     robot::cata.spin(-10);
+        // }
+        // glb::rot.reset_position();
+        // pros::delay(300);
+        // robot::cata.stop('c');
     }
 
     void cataControl() {
         // std::cout << limit.get_value() << std::endl;
         int angle = rot.get_angle();
+        // std::cout << angle << std::endl;
         switch (state) {
             case firing:
-                if (angle < (full + 10)) {
+                if (limit.get_value()) {
                     robot::cata.spin(-127);
                 }
                 else {
-                    state = reloading;
+                    delay.reset();
+                    state = delayed;
                 }
                 break;
 
             case reloading:
-                if(angle < full || (angle > (full + 10) && angle < 36000)) {
-                    if (fmod(angle, full) < full/2) {
+                if (!limit.get_value()) {
+                    inRange.reset();
+                    double error = abs(lib::minError(load/100, angle/100));
+                    std::cout << error << std::endl;
+                    if (error > 40) {
                         robot::cata.spin(-127);
                     }
                     else {
-                        robot::cata.spin(kp * (full - angle));
+                        robot::cata.spin(-48 - (kp * error));
                     }
                 }
                 else {
-                    robot::cata.stop('c');
-                    state = idle;
+                    if (angle > load) {
+                        robot::cata.spin(-50);
+                        inRange.reset();
+                    }
+                    else {
+                        if (inRange.time() > 230) {
+                            robot::cata.stop('c');
+                            state = idle;
+                        }
+                    }
                 }
                 break;
 
@@ -62,7 +78,7 @@ namespace cata {
                 break;
 
             case half:
-                if(angle < full/2) {
+                if(angle < load/2) {
                     robot::cata.spin(-127);
                 }
                 else {
