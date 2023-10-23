@@ -17,7 +17,8 @@ void initialize() {
 void autonomous() {auton();}
 
 void opcontrol() {
-	robot::controller.setCurves(0, 4);
+	robot::controller.setCurves(0, 0);
+	// robot::chassMtrs.stop('c');
 
 	while (true) 
 	{

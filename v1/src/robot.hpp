@@ -14,7 +14,7 @@ namespace glb {
     pros::ADIDigitalOut spis('C');
     pros::ADIButton limit('G');
     pros::Controller controller(pros::E_CONTROLLER_MASTER);
-    pros::Rotation rot(15);
+    pros::Rotation rot(19);
 }
 
 //https://www.desmos.com/calculator/zwl4noapxl
@@ -36,10 +36,10 @@ namespace robot {
             .trackDia = 0,
         }, {
             .maxSpeed = MAX_LIN,
-            .fwdAccel = MAX_LIN / 18,
+            .fwdAccel = MAX_LIN / 26,
             .fwdDecel = MAX_LIN / 18,
             .revAccel = MAX_LIN / 18,
-            .revDecel = MAX_LIN / 18,
+            .revDecel = MAX_LIN / 32,
             .velToVolt = 196.001723856
         }, {
             .maxSpeed = MAX_ANG,
