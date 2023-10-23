@@ -1,6 +1,8 @@
 #pragma once
 #include "robot.hpp"
 
+#define neg(a) 360-a
+
 using namespace robot;
 using namespace lib;
 
@@ -14,31 +16,31 @@ pidConstants _180 {
 }; 
 
 pidConstants _135 {
-    .p = 5.9, 
-    .i = 0.6, 
-    .d = 70, 
-    .tolerance = 0.05, 
-    .integralThreshold = 1.1, 
-    .maxIntegral = 20
+    .p = 6.3, 
+    .i = 0.43, 
+    .d = 59, 
+    .tolerance = 0.01, 
+    .integralThreshold = 1, 
+    .maxIntegral = 100
 }; 
 
 
 pidConstants _90 {
-    .p = 6, 
-    .i = 0, 
-    .d = 40, 
-    .tolerance = 0, 
-    .integralThreshold = 0, 
-    .maxIntegral = 0
+    .p = 6.3, 
+    .i = 0.43, 
+    .d = 59, 
+    .tolerance = 0.01, 
+    .integralThreshold = 1, 
+    .maxIntegral = 100
 }; 
 
 pidConstants _45 {
-    .p = 5.9, 
-    .i = 0.6, 
-    .d = 70, 
-    .tolerance = 0.05, 
+    .p = 4.9, 
+    .i = 0.4, 
+    .d = 26, 
+    .tolerance = 0.01, 
     .integralThreshold = 1.1, 
-    .maxIntegral = 20
+    .maxIntegral = 100
 }; 
 
 pidConstants _30 {
@@ -77,16 +79,63 @@ pidConstants _lin {
     .maxIntegral = 0
 };
 
+// pidConstants _arc {
+//     .p = 10,
+//     .i = 0,
+//     .d = 0,
+//     .tolerance = 0,
+//     .integralThreshold = 0,
+//     .maxIntegral = 0
+// };
 
 void test1() {
     // chass.pidDrive(1000, 1500, linear);
     // chass.profiledDrive(25);    
-    chass.profiledTurn(90,1);
+    chass.profiledTurn(25,1);
 }
 
 void test2() {
-    chass.pidTurn(90, 4000, _90);
-    chass.pidTurn(45, 4000, _45);
+    // chass.arcTurn()
+    // chass.pidTurn(90, 4000, _90);
+    // chass.pidTurn(45, 4000, _45);
+}
+
+void six_far() {
+    glb::wpis1.set_value(true);
+    pros::delay(300);
+    glb::wpis1.set_value(false);
+    robot::intake.spin(127);
+    chass.profiledDrive(22, 200);
+    chass.profiledDrive(-30, 130);
+    robot::intake.spin(5);
+    chass.pidTurn(135, 700, _135);
+    robot::intake.spin(-127);
+    chass.profiledDrive(13, 100);
+    chass.pidTurn(45, 700, _90);
+    robot::scraper.toggle();
+    chass.profiledDrive(-8, 100);
+    chass.pidTurn(neg(45), 920, _90);
+    robot::scraper.toggle();
+    chass.profiledDrive(-19, 100);
+    chass.pidTurn(neg(90), 700, _45);
+    chass.profiledDrive(-20, 40);
+    chass.profiledDrive(5, 100);
+    chass.pidTurn(0, 690, _90);
+    chass.profiledDrive(21, 100);
+    chass.pidTurn(45, 600, _45);
+    robot::intake.spin(127);
+    chass.profiledDrive(31, 200);
+    glb::wpis1.set_value(true);
+    robot:intake.spin(20);
+    chass.pidTurn(173, 800, _135);
+    robot::intake.spin(-127);
+    glb::wpis1.set_value(false);
+    chass.profiledDrive(20, 100);
+    chass.profiledDrive(10, 100);
+    chass.pidTurn(127, 700, _45);
+    chass.profiledDrive(-33, 0);
+    robot::scraper.toggle();
+
 }
 
 void calcTrack() {
@@ -113,6 +162,6 @@ void calcTrack() {
 
 //creates list of auton function pointers and names - useful for auton selector
 lib::atns autons = {
-    {test1, test2, calcTrack}, 
-    {"test", "test2", "track"}
+    {test1, test2, six_far, calcTrack}, 
+    {"test", "test2", "six_far", "track"}
 };
