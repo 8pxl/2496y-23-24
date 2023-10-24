@@ -20,18 +20,17 @@ namespace cata {
     cataState state = idle;
     int target;
     double kp = 0.7;
+    lib::pid pid({
+        .p = 0.7,
+        .i = 0.1, 
+        .d = 0, 
+        .tolerance = 0.05, 
+        .integralThreshold = 1.1, 
+        .maxIntegral = 20
+    }, 0);
     lib::timer delay;
-    lib::timer inRange;
-
-    void calibrate() {
-        // lib::timer t1;
-        // while (t1.time() < 1600) {
-        //     robot::cata.spin(-10);
-        // }
-        // glb::rot.reset_position();
-        // pros::delay(300);
-        // robot::cata.stop('c');
-    }
+    lib::timer inRange; 
+    double target;
 
     void cataControl() {
         // std::cout << limit.get_value() << std::endl;
@@ -49,29 +48,44 @@ namespace cata {
                 break;
 
             case reloading:
-                if (!limit.get_value()) {
+                if (inRange.time() > 300) {
+                    robot::cata.stop('b');
+                    state = idle;
+                }
+                if (!limit.get_value() && !fabs(pid.getDerivative()) < 5) {
                     inRange.reset();
-                    double error = abs(lib::minError(load/100, angle/100));
-                    std::cout << error << std::endl;
-                    if (error > 40) {
-                        robot::cata.spin(-127);
-                    }
-                    else {
-                        robot::cata.spin(-48 - (kp * error));
-                    }
+                }
+                double error = abs(lib::minError(load/100, angle/100));
+                if (error > target/3) {
+                    robot::cata.spin(-127);
                 }
                 else {
-                    if (angle > load) {
-                        robot::cata.spin(-50);
-                        inRange.reset();
-                    }
-                    else {
-                        if (inRange.time() > 230) {
-                            robot::cata.stop('c');
-                            state = idle;
-                        }
-                    }
+                    robot::cata.spin(-40 - pid.out(error));
                 }
+
+                // if (!limit.get_value()) {
+                //     inRange.reset();
+                //     double error = abs(lib::minError(load/100, angle/100));
+                //     std::cout << error << std::endl;
+                    // if (error > 40) {
+                    //     robot::cata.spin(-127);
+                    // }
+                    // else {
+                    //     robot::cata.spin(-48 - (kp * error));
+                    // }
+                // }
+                // else {
+                //     if (angle > load) {
+                //         robot::cata.spin(-50);
+                //         inRange.reset();
+                //     }
+                //     else {
+                //         if (inRange.time() > 230) {
+                //             robot::cata.stop('c');
+                //             state = idle;
+                //         }
+                //     }
+                // }
                 break;
 
             case idle:
@@ -100,10 +114,13 @@ namespace cata {
     }
 
     void halfway() {
-        state = half;
+        // state = half;
+        target = halfPos;
+        state = reloading;
     }
 
     void fire() {
+        target = load;
         state = firing;
     }
 

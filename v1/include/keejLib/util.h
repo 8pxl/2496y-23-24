@@ -87,6 +87,7 @@ namespace lib
             pid(pidConstants cons, double error) : constants(cons), prevError(error){}
 
             double out(double error);
+            double getDerivative();
     };
 
     class cubicBezier 
