@@ -135,7 +135,15 @@ void six_far() {
     chass.pidTurn(127, 700, _45);
     chass.profiledDrive(-33, 0);
     robot::scraper.toggle();
+}
 
+void safe_near() {
+    chass.profiledDrive(-20, 130);
+    chass.pidTurn(135, 900, _90);
+    chass.profiledDrive(20, 130);
+    chass.pidTurn(neg(45), 900, _45);
+    chass.profiledDrive(-10,100);
+    robot::scraper.toggle();
 }
 
 void calcTrack() {
@@ -162,6 +170,6 @@ void calcTrack() {
 
 //creates list of auton function pointers and names - useful for auton selector
 lib::atns autons = {
-    {test1, test2, six_far, calcTrack}, 
-    {"test", "test2", "six_far", "track"}
+    {test1, test2, six_far, calcTrack, safe_near}, 
+    {"test", "test2", "six_far", "track", "safe_near"}
 };
