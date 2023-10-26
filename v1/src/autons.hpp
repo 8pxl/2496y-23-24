@@ -163,18 +163,15 @@ void safe_near() {
 
 void skills() {
     chass.profiledDrive(15, 130);
-    chass.pidTurn(neg(15), 800, _15);
+    chass.pidTurn(neg(17.4), 800, _15);
     chass.profiledDrive(3);
-    // bool prev = false;
-    // int count = 0;
-    // while (count < 5) {
-    //     if (glb::limit.get_value() != prev && !glb::limit.get_value()) {
-    //         count ++;
-    //     }
-    //     prev = glb::limit.get_value();
-    //     robot::cata.spin(-127);
-    // }
-    // robot::cata.stop('c');
+    robot::scraper.toggle();
+    lib::timer t1;
+    while (t1.time() < 30000) {
+        robot::cata.spin(-127);
+    }
+    robot::scraper.toggle();
+    robot::cata.stop('c');
     chass.arcTurn(60, 7, 600, 1, _arc);
     chass.arcTurn(0, 10, 860, -1, _arc);
     robot::intake.spin(-127);
