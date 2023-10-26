@@ -32,7 +32,7 @@ namespace robot {
         glb::imu, 
         {6, 8}, {
             .horizTrack = 5.53532 + 5.25712, 
-            .vertTrack = 0,
+            .vertTrack = (5.53532 + 5.25712)/2,
             .trackDia = 0,
         }, {
             .maxSpeed = MAX_LIN,

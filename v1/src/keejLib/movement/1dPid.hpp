@@ -94,6 +94,8 @@ void lib::chassis::arcTurn(double target, double radius, double timeout, int dir
   while (timer.time() < timeout)
   {
     curr = imu -> get_heading();
+    // double temp = lib::minError(target, curr);
+    // std::cout << temp << std::endl;
     double vel = controller.out(lib::minError(target, curr));
     double rvel = (2 * vel) / (ratio+1);
     rvel = std::abs(rvel) >= 127 ? (127 * lib::sign(rvel)) : rvel;
@@ -101,7 +103,6 @@ void lib::chassis::arcTurn(double target, double radius, double timeout, int dir
 
     if(lib::sign(dir) == 1) chass -> spinDiffy(rvel, lvel);
     else chass -> spinDiffy(-lvel, -rvel);
-
     pros::delay(10);
   }
   chass -> stop('b');
