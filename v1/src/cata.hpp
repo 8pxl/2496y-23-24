@@ -18,11 +18,9 @@ namespace cata {
     };
     
     cataState state = idle;
-    int target;
-    double kp = 0.7;
     lib::pid pid({
-        .p = 0.7,
-        .i = 0.1, 
+        .p = 0.5,
+        .i = 0, 
         .d = 0, 
         .tolerance = 0.05, 
         .integralThreshold = 1.1, 
@@ -30,11 +28,12 @@ namespace cata {
     }, 0);
     lib::timer delay;
     lib::timer inRange; 
-    double target;
+    double target = load;
 
     void cataControl() {
         // std::cout << limit.get_value() << std::endl;
         int angle = rot.get_angle();
+        double error = abs(lib::minError(target/100, angle/100));
         // std::cout << angle << std::endl;
         switch (state) {
             case firing:
@@ -55,8 +54,7 @@ namespace cata {
                 if (!limit.get_value() && !fabs(pid.getDerivative()) < 5) {
                     inRange.reset();
                 }
-                double error = abs(lib::minError(load/100, angle/100));
-                if (error > target/3) {
+                if (error > target/2) {
                     robot::cata.spin(-127);
                 }
                 else {
