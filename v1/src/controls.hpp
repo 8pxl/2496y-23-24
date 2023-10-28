@@ -33,6 +33,7 @@ void driver() {
 
             // if (state[NLEFT]) robot::wings.toggle();
             if (state[NLEFT]) scraper.toggle();
+            if (state[UP]) robot::cata.spin(-100);
         }
         if(!state[L1]) robot::wings.setState(false);
 

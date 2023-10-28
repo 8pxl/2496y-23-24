@@ -54,6 +54,7 @@ namespace cata {
                     inRange.reset();
                 }
                 if (inRange.time() > 400) {
+                    robot::cata.spin(0);
                     robot::cata.stop('c');
                     state = idle;
                 }
@@ -97,7 +98,7 @@ namespace cata {
 
             case idle:
                 // std::cout << "idle" << std::endl;
-                robot::cata.spin(0);
+                // robot::cata.spin(0);
                 break;
 
             case half:
