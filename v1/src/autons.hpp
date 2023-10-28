@@ -140,7 +140,6 @@ void six_far() {
     robot::blocker.stop('b');
     chass.profiledDrive(-33, 0);
     chass.arcTurn(133, 11, 1200, 1, _arc);
-
 }
 
 void safe_near() {
@@ -157,11 +156,11 @@ void safe_near() {
     robot::blocker.stop('b');
     chass.profiledDrive(-24, 130);
     chass.pidTurn(45, 900, _45);
-    chass.profiledDrive(26,100);
+    chass.profiledDrive(28.5,100);
     robot::intake.spin(-127);
     chass.pidTurn(0, 1200, _45);
     chass.profiledDrive(23.4,100);
-    robot::blocker.spin(-30);
+    robot::blocker.spin(-80);
     pros::delay(700);
     robot::blocker.stop('c');
 }
@@ -178,7 +177,7 @@ void skills() {
     robot::scraper.toggle();
     robot::cata.stop('c');
     chass.arcTurn(60, 7, 600, 1, _arc);
-    chass.arcTurn(0, 10, 860, -1, _arc);
+    chass.arcTurn(0, 8.5, 860, -1, _arc);
     robot::intake.spin(-127);
     // chass.pidTurn(30, 900, _45);
     // chass.profiledDrive(-34, 130);
@@ -192,18 +191,13 @@ void skills() {
     chass.profiledDrive(-30, 130);
     chass.profiledDrive(10, 130);
     chass.pidTurn(8, 700, _90);
-    chass.profiledDrive(28, 130);
-    chass.arcTurn(90, 6, 1000, -1, _arc);
-    chass.profiledDrive(10, 130);
+    chass.profiledDrive(29, 100);
+    chass.arcTurn(90, 6, 800, -1, _arc);
+    chass.profiledDrive(10, 100);
     chass.pidTurn(neg(20), 700, _45);
     robot::wings.toggle();
     chass.profiledDrive(-28, 130);
-    chass.pidTurn(neg(20), 700, _45);
-    robot::wings.toggle();
-    chass.profiledDrive(20, 130);
-    robot::wings.toggle();
-    chass.profiledDrive(-28, 130);
-    chass.pidTurn(10, 700, _15);
+    chass.pidTurn(20, 700, _15);
     robot::wings.toggle();
 
     chass.profiledDrive(27, 130);
@@ -214,14 +208,14 @@ void skills() {
     chass.profiledDrive(-30, 130);
     chass.pidTurn(0, 700, _45);
     robot::wings.toggle();
-    chass.profiledDrive(20, 130);
+    chass.profiledDrive(30, 130);
     chass.pidTurn(90, 900, _90);
     chass.profiledDrive(25, 130);
     chass.pidTurn(20, 900, _90);
     robot::wings.toggle();
     chass.profiledDrive(-30, 130);
     robot::wings.toggle();
-    chass.arcTurn(95, 5, 1300, -1, _arc);
+    chass.arcTurn(98, 5, 1300, -1, _arc);
     chass.profiledDrive(30, 0);
     chass.profiledDrive(7, 130);
     chass.pidTurn(180, 200, _90);
@@ -233,8 +227,6 @@ void skills() {
     chass.profiledDrive(20, 130);
     chass.pidTurn(60, 500, _45);
     chass.profiledDrive(-30, 130);
-
-
 }
 void calcTrack() {
 	double dl = 0;
