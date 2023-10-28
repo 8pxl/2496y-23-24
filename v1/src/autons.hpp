@@ -101,13 +101,15 @@ void test2() {
 }
 
 void six_far() {
+    robot::scraper.toggle();
     glb::wpis1.set_value(true);
     pros::delay(300);
     glb::wpis1.set_value(false);
     robot::intake.spin(127);
+    robot::scraper.toggle();
     chass.profiledDrive(22, 200);
+    robot::intake.spin(40);
     chass.profiledDrive(-30, 130);
-    robot::intake.spin(5);
     chass.pidTurn(135, 700, _135);
     robot::intake.spin(-127);
     chass.profiledDrive(13, 100);
@@ -119,22 +121,24 @@ void six_far() {
     chass.profiledDrive(-19, 100);
     chass.pidTurn(neg(90), 700, _45);
     chass.profiledDrive(-20, 40);
-    chass.profiledDrive(5, 100);
+    chass.profiledDrive(7, 100);
     chass.pidTurn(0, 690, _90);
-    chass.profiledDrive(21, 100);
-    chass.pidTurn(45, 600, _45);
+    chass.profiledDrive(20, 100);
+    chass.pidTurn(44, 600, _45);
     robot::intake.spin(127);
-    chass.profiledDrive(31, 200);
+    chass.profiledDrive(35, 330);
     glb::wpis1.set_value(true);
     robot:intake.spin(20);
-    chass.pidTurn(173, 800, _135);
+    chass.pidTurn(170, 800, _135);
     robot::intake.spin(-127);
     glb::wpis1.set_value(false);
     chass.profiledDrive(20, 100);
     chass.profiledDrive(10, 100);
-    chass.pidTurn(127, 700, _45);
+    robot::blocker.spin(70);
+    chass.pidTurn(128, 700, _45);
+    robot::blocker.stop('b');
     chass.profiledDrive(-33, 0);
-    robot::scraper.toggle();
+    chass.arcTurn(133, 11, 1200, 1, _arc);
 
 }
 
