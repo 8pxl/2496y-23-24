@@ -18,6 +18,7 @@ namespace lib
             double prevRotation = 0;
 
         public:
+            lib::odomType odom;
             chassis(lib::diffy& mtrs, pros::Imu& imu) : chass(&mtrs), imu(&imu){}
             chassis(lib::diffy& mtrs, pros::Imu& imu, lib::robotConstants constants, lib::accelConstants linear, lib::accelConstants angular) : chass(&mtrs), imu(&imu), constants(constants), linear(linear), angular(angular) {}
             chassis(lib::diffy& mtrs, pros::Imu& imu, std::vector<int> encoderPorts, lib::robotConstants constants, lib::accelConstants linear, lib::accelConstants angular);

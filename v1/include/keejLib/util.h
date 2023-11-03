@@ -37,6 +37,7 @@ namespace lib
         A = 22,
         NA = 23 
     };
+    enum odomType {twoIME, threeEncoder};
 
     struct pidConstants{double p,i,d,tolerance,integralThreshold, maxIntegral;};
 

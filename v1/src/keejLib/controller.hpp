@@ -80,6 +80,15 @@ std::vector<double> lib::controller::drive(int direction, driveMode mode)
         case tank:
             rStick = curve(cont -> get_analog(ANALOG_RIGHT_Y), rightCurve);
             return(std::vector<double>{lStick, rStick});
+
+        case curvature:
+            rStick = curve(cont ->get_analog(ANALOG_RIGHT_X), rightCurve);
+            if (lStick == 0) {
+                return(std::vector<double>{lStick + rStick, lStick - rStick});
+            }
+            double left = lStick + (std::abs(lStick) * rStick) / 127.0;
+            double right = lStick - (std::abs(lStick) * rStick) / 127.0;
+            return (std::vector<double>{left, right});
     }
 
     //you shoudlnt be here !

@@ -226,26 +226,19 @@ void six_far() {
 }
 
 void safe_near() {
-    robot::blocker.spin(40);
-    scraper.toggle();
-    pros::delay(500);
-    chass.profiledDrive(5, 130);
-    chass.profiledDrive(-17, 130);
-    robot::blocker.stop('c');
-    chass.pidTurn(90, 900, _45);
-    robot::blocker.spin(-45);
+    // robot::scraper.toggle();
+    // robot::blocker.spin(40);
+    // pros::delay(300);
+    // robot::blocker.spin(-30);
+    // robot::intake.spin(127);
+    // robot::scraper.toggle();
+    chass.arcTurn(neg(45), 9, 1300, -1, _arc);
     robot::scraper.toggle();
-    pros::delay(475);
-    robot::blocker.stop('b');
-    chass.profiledDrive(-24, 130);
-    chass.pidTurn(45, 900, _45);
-    chass.profiledDrive(28.5,100);
+    chass.pidTurn(neg(135), 900, _180);
+    robot::scraper.toggle();
     robot::intake.spin(-127);
-    chass.pidTurn(0, 1200, _45);
-    chass.profiledDrive(23.4,100);
-    robot::blocker.spin(-80);
-    pros::delay(700);
-    robot::blocker.stop('c');
+    chass.arcTurn(neg(90), 8, 1300, 1, _arc);
+    chass.profiledDrive(10, 200);
 }
 
 void skills() {
@@ -260,9 +253,9 @@ void skills() {
     chass.profiledDrive(3);
     robot::blocker.spin(0);
     lib::timer t1;
-    while (t1.time() < 30000) {
-        robot::cata.spin(-127);
-    }
+    // while (t1.time() < 30000) {
+    //     robot::cata.spin(-127);
+    // }
     robot::scraper.toggle();
     robot::cata.stop('c');
     chass.arcTurn(60, 7, 600, 1, _arc);

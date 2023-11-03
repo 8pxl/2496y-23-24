@@ -1,15 +1,15 @@
-/*
-!/.gitignore
-!/ri3d
-/ri3d/*
-!/ri3d/src
+# /*
+# !/.gitignore
+# !/ri3d
+# /ri3d/*
+# !/ri3d/src
 
-/*
-!/.gitignore
-!/v1
-/v1/*
-!/v1/src
-!/v1/include
+# /*
+# !/.gitignore
+# !/v1
+# /v1/*
+# !/v1/src
+# !/v1/include
 
 # /*
 # !/.gitignore
