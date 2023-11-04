@@ -232,13 +232,17 @@ void safe_near() {
     // robot::blocker.spin(-30);
     // robot::intake.spin(127);
     // robot::scraper.toggle();
-    chass.arcTurn(neg(45), 9, 1300, -1, _arc);
+    chass.arcTurn(neg(45), 10, 1300, -1, _arc);
     robot::scraper.toggle();
     chass.pidTurn(neg(135), 900, _180);
     robot::scraper.toggle();
     robot::intake.spin(-127);
-    chass.arcTurn(neg(90), 8, 1300, 1, _arc);
-    chass.profiledDrive(10, 200);
+    chass.arcTurn(neg(90), 14, 1300, -1, _arc);
+    chass.profiledDrive(17, 200);
+    chass.arcTurn(180, 11, 1300, -1, _arc);
+    robot::blocker.spin(50);
+    chass.profiledDrive(-30, 200);
+    robot::blocker.spin(0);
 }
 
 void skills() {
