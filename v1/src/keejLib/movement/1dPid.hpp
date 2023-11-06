@@ -79,7 +79,7 @@ lib::pid lib::chassis::pidTurn(double target, double timeout, char brake, lib::p
 }
 
 //TODO: make radius actual units lol
-void lib::chassis::arcTurn(double target, double radius, double timeout, int dir, lib::pidConstants constants)
+void lib::chassis::arcTurn(double target, double radius, double timeout, int dir, lib::pidConstants constants, double min = 0)
 {
   lib::timer timer;
 
@@ -97,6 +97,7 @@ void lib::chassis::arcTurn(double target, double radius, double timeout, int dir
     // double temp = lib::minError(target, curr);
     // std::cout << temp << std::endl;
     double vel = controller.out(lib::minError(target, curr));
+    vel = std::max(std::abs(vel), min) * lib::sign(vel);
     double rvel = (2 * vel) / (ratio+1);
     rvel = std::abs(rvel) >= 127 ? (127 * lib::sign(rvel)) : rvel;
     double lvel = ratio * rvel;
