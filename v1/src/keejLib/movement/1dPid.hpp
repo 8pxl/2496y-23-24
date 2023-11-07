@@ -20,6 +20,7 @@ lib::pid lib::chassis::pidTurn(double target, double timeout, lib::pidConstants 
     double temp = lib::minError(target, imu -> get_heading());
     if(fmod(timer.time(), 100) == 0) std::cout << temp << std::endl;
     double vel = pidController.out(temp);
+    last = std::abs(vel);
     chass -> spinDiffy(-vel, vel);
     pros::delay(10);
   }
@@ -72,6 +73,7 @@ lib::pid lib::chassis::pidTurn(double target, double timeout, char brake, lib::p
   while(timer.time() < timeout)
   {
     double vel = cont.out(lib::minError(target, imu -> get_heading()));
+    last = std::abs(vel);
     chass -> spinDiffy(vel, -vel);
   }
   chass -> stop(brake);
@@ -98,6 +100,7 @@ void lib::chassis::arcTurn(double target, double radius, double timeout, int dir
     // std::cout << temp << std::endl;
     double vel = controller.out(lib::minError(target, curr));
     vel = std::max(std::abs(vel), min) * lib::sign(vel);
+    last = std::abs(vel);
     double rvel = (2 * vel) / (ratio+1);
     rvel = std::abs(rvel) >= 127 ? (127 * lib::sign(rvel)) : rvel;
     double lvel = ratio * rvel;
@@ -124,8 +127,9 @@ void lib::chassis::eulerTurn(double theta, double rate, double timeout, int dir,
     double ratio = sl/sr;
 
     double vel = controller.out(lib::minError(theta, curr));
-    vel = std::abs(vel) >= 127 ? (127 * lib::sign(vel)) : vel;
+    last = std::abs(vel);
     double rvel = (2 * vel) / (ratio+1);
+    rvel = std::abs(rvel) >= 127 ? (127 * lib::sign(rvel)) : rvel;
     double lvel = ratio * rvel;
 
     if(lib::sign(dir) == 1) chass -> spinDiffy(rvel, lvel);
