@@ -64,7 +64,7 @@ void lib::chassis::profiledTurn(double target, int endDelay = 500, double start 
   double error = lib::minError(target, imu -> get_heading());
   int dir = lib::sign(error);
   double amt = lib::dtr(std::abs(error));
-  double rot = constants.trackDia * amt;
+  double rot = constants.vertTrack * amt;
   std::vector<double> profile = asymTrapezoidalProfile(amt, linear.maxSpeed, linear.fwdAccel,  linear.fwdDecel, start, end);
   chass -> reset();
   std::cout << profile.size() << std::endl;
