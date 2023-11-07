@@ -38,9 +38,9 @@ namespace lib
             void eulerTurn(double theta, double rate, double timeout, int dir, lib::pidConstants constants);
 
             //1dmp
-            std::vector<double> asymTrapezoidalProfile(double dist, double maxSpeed, double accel, double decel);
-            void profiledDrive(double target, int endDelay);
-            void profiledTurn(double target, int dir, int endDelay);
+            std::vector<double> asymTrapezoidalProfile(double dist, double maxSpeed, double accel, double decel, double start, double end);
+            void profiledDrive(double target, int endDelay, double start, double end);
+            void profiledTurn(double target, int endDelay, double start, double end);
 
 
             //2dpid
