@@ -122,8 +122,8 @@ void lib::chassis::eulerTurn(double theta, double rate, double timeout, int dir,
   {
     curvature += rate;
     double curr = imu -> get_heading();
-    double sl = theta * (1/curvature + this -> constants.vertTrack);
-    double sr = theta * (1/curvature - this -> constants.vertTrack);
+    double sl = dtr(theta) * (1/curvature + this -> constants.vertTrack);
+    double sr = dtr(theta) * (1/curvature - this -> constants.vertTrack);
     double ratio = sl/sr;
 
     double vel = controller.out(lib::minError(theta, curr));
