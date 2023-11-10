@@ -34,7 +34,7 @@ namespace cata {
         // std::cout << limit.get_value() << std::endl;
         double angle = rot.get_angle();
         double error = lib::minError(target/100.0, angle/100.0);
-        std::cout << error << std::endl;
+        // std::cout << error << std::endl;
         switch (state) {
             case firing:
                 inRange.reset();

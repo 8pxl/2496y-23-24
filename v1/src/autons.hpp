@@ -90,8 +90,9 @@ pidConstants _arc {
 
 void test1() {
     // chass.pidDrive(1000, 1500, linear);
-    // chass.profiledDrive(25);    
-    // chass.profiledTurn(25,1);
+    // chass.arcTurn(90, 12, 1400, 1, _arc, 20);
+    // chass.profiledDrive(25, 0, 0, 0);    
+    chass.profiledTurn(90,1);
     // chass.arcTurn(90, 12, 1400, 1, _arc);
     // chass.eulerTurn(90, 0.005, 1200, 1, _arc);
 }
