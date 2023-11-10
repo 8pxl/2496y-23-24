@@ -3,6 +3,7 @@
 
 std::vector<double> lib::chassis::asymTrapezoidalProfile(double dist, double maxSpeed, double accel, double decel, double start, double end)
 {
+  
   double a = ((1 / (2*accel)) + (1 / (2*decel)));
   double c1= (-pow(start, 2) / (2*accel)) - (pow(end, 2) / (2*decel));
   double c = c1 - dist;
@@ -146,15 +147,15 @@ void lib::chassis::profiledTurn(double target, int endDelay = 500)
   int dir = lib::sign(error);
   double amt = lib::dtr(std::abs(error));
   double rot = constants.vertTrack * amt;
-  std::vector<double> profile = asymTrapezoidalProfile(rot, linear.maxSpeed, linear.fwdAccel, linear.fwdDecel, 0, 0);
+  std::vector<double> profile = asymTrapezoidalProfile(rot, angular.maxSpeed, angular.fwdAccel, angular.fwdDecel, 0, 0);
   chass -> reset();
   double prev = 0;
   for (int i = 0; i < profile.size(); i++)
   {
     double currVel = chass -> getSpeed(true);
-    std::cout << (profile[i] - linear.rpmToVel * currVel) << std::endl;
+    std::cout << (profile[i] - angular.rpmToVel * currVel) << std::endl;
     // double vel = (dir * profile[i] * linear.kv) + (linear.ka * (profile[i] - prev)) + (linear.kp * (profile[i] - (currVel - prevVel)));
-    double vel = ((dir * profile[i] * linear.kv) + (linear.ka * (profile[i]-prev)) + (linear.kp * ((profile[i] - linear.rpmToVel * currVel))));
+    double vel = ((dir * profile[i] * angular.kv) + (angular.ka * (profile[i]-prev)) + (angular.kp * ((profile[i] - angular.rpmToVel * currVel))));
     prev = profile[i];
     chass -> spinDiffy(vel, -vel);
     pros::delay(10);

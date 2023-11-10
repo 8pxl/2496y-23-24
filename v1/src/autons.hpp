@@ -90,11 +90,9 @@ pidConstants _arc {
 
 void test1() {
     // chass.pidDrive(1000, 1500, linear);
-    // chass.arcTurn(90, 12, 1400, 1, _arc, 20);
-    // chass.profiledDrive(25, 0, 0, 0);    
+    // chass.profiledDrive(25);    
     chass.profiledTurn(90,1);
     // chass.arcTurn(90, 12, 1400, 1, _arc);
-    // chass.eulerTurn(90, 0.005, 1200, 1, _arc);
 }
 
 void test2() {
@@ -191,13 +189,15 @@ void six_far() {
     glb::wpis1.set_value(false);
     robot::intake.spin(127);
     robot::scraper.toggle();
-    chass.profiledDrive(22, 10);
+    chass.profiledDrive(22, 200);
     robot::blocker.spin(0);
     robot::blocker.spin(0);
     robot::intake.spin(40);
-    chass.profiledDrive(-24, 0);
-    chass.arcTurn(neg(45), 11, 690, -1, _arc, 40);
-    chass.arcTurn(45, 5, 800, 1, _arc, 5);
+    chass.profiledDrive(-29, 130);
+    chass.pidTurn(135, 700, _135);
+    robot::intake.spin(-127);
+    chass.profiledDrive(15.7, 100);
+    chass.pidTurn(45, 700, _90);
     robot::scraper.toggle();
     chass.profiledDrive(-8, 100);
     chass.pidTurn(neg(45), 920, _90);
@@ -262,100 +262,64 @@ void skills() {
     }
     robot::scraper.toggle();
     robot::cata.stop('c');
-    chass.arcTurn(60, 6.7, 600, 1, _arc, 30);
-    chass.arcTurn(0, 7, 700, -1, _arc);
+    chass.arcTurn(60, 7, 600, 1, _arc);
+    chass.arcTurn(0, 8, 860, -1, _arc);
     robot::intake.spin(-127);
-    chass.profiledDrive(-46, 0);
+    chass.profiledDrive(-46, 30);
+
     chass.arcTurn(neg(90), 10, 800, -1, _arc);
-    chass.timedDrive(800, -127);
-    chass.pidTurn(neg(80), 200, _45);
-    chass.profiledDrive(10, 0);
-    chass.pidTurn(neg(70), 190, _45);
-    chass.timedDrive(800,-127);
-    chass.profiledDrive(5, 0);
-    chass.pidTurn(10, 500, _90);
-    chass.profiledDrive(39, 0);
-    glb::wpis2.set_value(true);
-    chass.pidTurn(90, 600, _90);
-    glb::wpis2.set_value(false);
-    chass.profiledDrive(20, 10);
-    chass.pidTurn(4, 600, _45);
+    chass.profiledDrive(-20, 130);
+    chass.pidTurn(neg(80), 400, _45);
+    chass.profiledDrive(20, 60);
+    chass.pidTurn(neg(60), 300, _45);
+    chass.profiledDrive(-30, 5);
+    chass.profiledDrive(10, 50);
+    chass.pidTurn(8, 600, _90);
+    chass.profiledDrive(29, 50);
+    chass.arcTurn(90, 6, 710, -1, _arc);
+    chass.profiledDrive(5, 10);
+    chass.pidTurn(neg(10), 600, _45);
     robot::wings.toggle();
-    chass.timedDrive(800, -127);
+    chass.profiledDrive(-28, 40);
     chass.pidTurn(neg(2), 300, _45);
     robot::wings.toggle();
     // chass.pidTurn(90, 200, _90);
     // chass.pidTurn(180, 700, _90);
     // chass.arcTurn(neg(90), 7, 600, 1, _arc);
     // chass.arcTurn(0, 7, 1200, 1, _arc);
-    // chass.arcTurn(90, 10, 950, -1, _arc, 20);
-    chass.profiledDrive(20, 0);
-    chass.pidTurn(85, 500, _90);
-    chass.profiledDrive(21, 0);
-    chass.pidTurn(4, 600, _45);
+    chass.arcTurn(90, 10.8, 950, -1, _arc);
+    chass.profiledDrive(10, 0);
+    chass.pidTurn(0, 700, _45);
     robot::wings.toggle();
-    chass.timedDrive(800, -127);
-    chass.pidTurn(4, 300, _45);
+    chass.profiledDrive(-30, 40);
+    chass.pidTurn(0, 500, _45);
     robot::wings.toggle();
-    chass.profiledDrive(20, 10);
-    chass.pidTurn(86, 500, _90);
-    chass.profiledDrive(20, 10);
-    glb::wpis2.set_value(true);
-    chass.pidTurn(180, 600, _90);
-    chass.profiledDrive(-10, 10);
-    glb::wpis2.set_value(false);
-    chass.pidTurn(neg(90), 600, _90);
-    chass.timedDrive(1300, -127);
-    chass.pidTurn(0, 900, _90);
+    chass.profiledDrive(27, 130);
+    chass.pidTurn(90, 550, _90);
+    chass.profiledDrive(24, 40);
+    chass.pidTurn(180, 630, _90);
+    robot::wings.toggle();
+    chass.profiledDrive(15, 50);
+    robot::wings.toggle();
+    chass.profiledDrive(-20, 50);
+    chass.pidTurn(90, 600, _90);
+    chass.profiledDrive(-15, 50);
+    chass.pidTurn(0, 550, _90);
+    robot::wings.toggle();
+    chass.profiledDrive(-30, 130);
+    robot::wings.toggle();
+    chass.arcTurn(98, 5, 940, -1, _arc);
+    chass.profiledDrive(30, 0);
+    chass.profiledDrive(7, 130);
+    chass.pidTurn(180, 200, _90);
+    chass.pidTurn(neg(90), 200, _90);
+    chass.pidTurn(0, 500, _90);
     chass.arcTurn(90, 10, 800, 1, _arc);
     chass.profiledDrive(-20, 10);
     chass.pidTurn(80, 400, _45);
     chass.profiledDrive(20, 10);
     chass.pidTurn(60, 500, _45);
     chass.profiledDrive(-30, 130);
-
-
-    // chass.pidTurn(neg(10), 700, _90);
-    // chass.profiledDrive(25, 0);
-    // chass.pidTurn(15, 700, _90);
-    // chass.timedDrive(800, -127);
-    // chass.pidTurn(0, 500, _45);
-    // robot::wings.toggle();
-    // chass.profiledDrive(27, 130);
-    // chass.pidTurn(90, 550, _90);
-    // robot::wings.toggle();
-    // chass.profiledDrive(-15, 40);
-    // chass.pidTurn(neg(10), 600, _45);
-    // robot::wings.toggle();
-    // chass.timedDrive(800, -127);
-
-    // robot::wings.toggle();
-    // chass.pidTurn(90, 200,
-
-
-    // chass.pidTurn(190, 630, _90);
-    // chass.profiledDrive(25, 50);
-    // chass.profiledDrive(-30, 50);
-    // robot::wings.toggle();
-
-    // chass.pidTurn(90, 600, _90);
-    // chass.profiledDrive(-15, 50);
-    // chass.pidTurn(0, 550, _90);
-    // robot::wings.toggle();
-    // chass.profiledDrive(-30, 130);
-    // robot::wings.toggle();
-    // chass.arcTurn(107, 4.8, 940, -1, _arc);
-    // chass.profiledDrive(30, 0);
-    // chass.profiledDrive(7, 130);
-    // chass.pidTurn(180, 200, _90);
-    // chass.pidTurn(neg(90), 200, _90);
-    // chass.pidTurn(0, 500, _90);
-    // chass.arcTurn(90, 10, 800, 1, _arc);
-    // chass.profiledDrive(-20, 10);
-    // chass.pidTurn(80, 400, _45);
-    // chass.profiledDrive(20, 10);
-    // chass.pidTurn(60, 500, _45);
-    // chass.profiledDrive(-30, 130);
 }
 void calcTrack() {
 	double dl = 0;
