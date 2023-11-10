@@ -19,6 +19,8 @@ namespace glb {
 
 //https://www.desmos.com/calculator/zwl4noapxl
 //math for robot constants
+//units: inches and 10 ms,
+//ex: vel -> inches / 10 ms
 namespace robot {
     lib::diffy chassMtrs({-2, -3, -1, 9, 6, 10});
     lib::mtrs intake({-5});
