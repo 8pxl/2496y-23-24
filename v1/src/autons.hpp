@@ -262,36 +262,59 @@ void skills() {
     // }
     robot::scraper.toggle();
     robot::cata.stop('c');
+
+    // - cool s manuever + drive
     chass.arcTurn(45, 6.3, 460, 1, _arc, 50);
     chass.arcTurn(neg(4), 8.7, 400, -1, _arc, 35);
     robot::intake.spin(-127);
     // chass.profiledDrive(-46, 30);
     chass.profiledDrive(-70, 30, 40, 45);
 
+    // - first side push
     chass.arcTurn(neg(85), 10, 800, -1, _arc);
-    chass.timedDrive(700, -127);
+    chass.timedDrive(500, -127);
     chass.pidTurn(neg(80), 360, _45);
     chass.profiledDrive(15, 0);
-    chass.pidTurn(neg(60), 300, _45);
-    chass.timedDrive(800, -127);
-    chass.profiledDrive(7, 5);
-    chass.pidTurn(15, 470, _90);
-    chass.profiledDrive(29, 0, 0, 20);
-    chass.arcTurn(90, 6, 710, -1, _arc);
-    chass.profiledDrive(20, 10);
-    chass.pidTurn(5, 600, _45);
+    chass.pidTurn(neg(60), 280, _45);
+    chass.timedDrive(500, -127);
+
+    // chass.profiledDrive(7, 5);
+    // chass.pidTurn(15, 470, _90);
+
+    // - reallign balls on the side
+    chass.arcTurn(15, 7, 430, _arc, 40);
+    chass.profiledDrive(20, 70, 40, 0);
+    chass.pidTurn(neg(90), 400, _90);
+    robot::wings.toggle();
+    chass.profiledDrive(-15, 100);
+    robot::wings.toggle();
+
+
+    // - come out of goal
+    chass.arcTurn(5, 7, 500, _arc, 50)
+    chass.profiledDrive(25, 0, 50, 40);
+    chass.arcTurn(90, 6, 400, -1, _arc, 20);
+    chass.profiledDrive(29, 10, 20, 40);
+    chass.arcTurn(0, 5.7, 400, -1, _arc, 20);
     robot::wings.toggle();
     chass.timedDrive(800, -127);
     chass.pidTurn(neg(2), 300, _45);
     robot::wings.toggle();
+
+
+
     // chass.pidTurn(90, 200, _90);
     // chass.pidTurn(180, 700, _90);
     // chass.arcTurn(neg(90), 7, 600, 1, _arc);
     // chass.arcTurn(0, 7, 1200, 1, _arc);
-    chass.profiledDrive(25, 0);
-    chass.pidTurn(90, 500, _90);
-    chass.profiledDrive(-10, 0);
-    chass.pidTurn(neg(10), 450, _45);
+    chass.profiledDrive(25, 0, 0, 30);
+    chass.arcTurn(neg(60), 5.7, 400, -1, _arc, 20);
+    chass.profiledDrive(30, 0, 20, 30);
+    chass.arcTurn(neg(20), 5.7, 400, -1, _arc, 0);
+
+    // chass.pidTurn(90, 500, _90);
+    // chass.profiledDrive(-10, 0);
+    // chass.pidTurn(neg(10), 450, _45);
     robot::wings.toggle();
     chass.timedDrive(800, -127);
     chass.pidTurn(0, 500, _45);
