@@ -52,24 +52,6 @@ void lib::chassis::updatePos()
     vertTracker -> reset();
   }
 
-  // else if (odom == odomType::twoIME) 
-  // {
-  //       let deltaRotation = (d.1 - d.0) / (self.robotSize);
-  //       self.heading += deltaRotation;
-  //       if deltaRotation == 0.0 {
-  //           self.position.0  -= (PI/2.0 + self.heading).cos() * d.1;
-  //           self.position.1 -= (PI/2.0 + self.heading).sin() * d.1;
-  //       }
-  //       else {
-  //           let r = d.0 / deltaRotation + self.robotSize / 2.0;
-  //           let relativeY = 2.0 * (deltaRotation / 2.0).sin() * r;
-  //           let rotationOffset = self.heading + (deltaRotation / 2.0);
-  //           let theta = PI / 2.0 + rotationOffset;
-  //           let radius = relativeY;
-  //           self.position.0 -= radius * theta.cos();
-  //           self.position.1 -= radius * theta.sin();
-  //       }
-  // }
 }
 
 void lib::chassis::initTracking()

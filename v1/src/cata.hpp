@@ -19,7 +19,7 @@ namespace cata {
     
     cataState state = idle;
     lib::pid pid({
-        .p = 3.2,
+        .p = 2.8,
         .i = 0, 
         .d = 0, 
         .tolerance = 0.05, 
