@@ -297,6 +297,7 @@ void safe_near() {
 }
 
 void skills() {
+    /**/
     robot::scraper.toggle();
     robot::blocker.spin(40);
     robot::intake.spin(-127);
@@ -316,7 +317,7 @@ void skills() {
 
     // - cool s manuever + drive
     chass.arcTurn(45, 6.3, 460, 1, _arc, 50);
-    chass.arcTurn(0.4, 8, 470, -1, _arc, 50);
+    chass.arcTurn(2.3, 8, 470, -1, _arc, 50);
     robot::intake.spin(-127);
     // chass.profiledDrive(-46, 30);
     chass.profiledDrive(-68, 0, 50, 55);
@@ -325,18 +326,21 @@ void skills() {
     glb::wpis1.set_value(true);
     chass.arcTurn(neg(85), 9.7, 800, -1, _arc);
     chass.timedDrive(500, -127);
-    chass.pidTurn(neg(80), 360, _45);
+    chass.pidTurn(neg(80), 300, _45);
     chass.profiledDrive(15, 0);
     chass.pidTurn(neg(60), 280, _45);
     glb::wpis1.set_value(false);
-    chass.timedDrive(500, -127);
+    chass.timedDrive(550, -127);
+    pros::delay(100);
+
+    /**/
 
     // chass.profiledDrive(7, 5);
     // chass.pidTurn(15, 470, _90);
 
     // - reallign balls on the side
-    chass.arcTurn(15, 5, 800, -1, _arc, 40);
-    chass.profiledDrive(20, 40, 40, 0);
+    chass.arcTurn(neg(5), 6, 520, -1, _arc, 5);
+    chass.profiledDrive(32, 10, 10, 0);
     chass.pidTurn(neg(90), 450, _90);
     robot::wings.toggle();
     chass.profiledDrive(-15, 100);
@@ -344,19 +348,18 @@ void skills() {
 
 
     // - allign for push #1
-    chass.arcTurn(5, 5, 800, -1, _arc, 50);
-    chass.profiledDrive(25, 0, 50, 40);
-    chass.arcTurn(90, 6, 400, -1, _arc, 20);
-    chass.profiledDrive(29, 10, 20, 40);
-    chass.arcTurn(0, 5.7, 400, -1, _arc, 20);
+    chass.arcTurn(50, 4.5, 540, -1, _arc, 40);
+    // chass.arcTurn(90, 6, 400, -1, _arc, 20);
+    chass.profiledDrive(25, 10, 40, 0);
+    chass.pidTurn(0, 500, _90);
 
     // - push #1
-    robot::wings.toggle();
+    // glb::wpis1.set_value(true);
     chass.timedDrive(800, -127);
-    chass.pidTurn(neg(2), 300, _45);
-    robot::wings.toggle();
-    chass.pidTurn(90, 180, _90);
-    chass.pidTurn(183, 400, _90);
+    chass.pidTurn(0, 400, _90);
+    // glb::wpis1.set_value(false);
+    // chass.pidTurn(90, 180, _90);
+    // chass.pidTurn(183, 400, _90);
 
 
 
@@ -365,34 +368,79 @@ void skills() {
     // chass.arcTurn(neg(90), 7, 600, 1, _arc);
     // chass.arcTurn(0, 7, 1200, 1, _arc);
     // - allign for push #2
-    chass.profiledDrive(-25, 0, 0, 50);
-    chass.arcTurn(120, 5.7, 400, -1, _arc, 40);
-    chass.profiledDrive(-30, 0, 40, 30);
-    chass.arcTurn(neg(20), 5.7, 400, -1, _arc, 0);
+    // chass.profiledDrive(12, 0, 0, 50);
+    // chass.arcTurn(10, 5.7, 260, -1, _arc, 40, 'c');
+    // chass.profiledDrive(20, 0, 40, 30);
+    // chass.arcTurn(neg(0), 5.7, 400, 1, _arc, 0);
 
-    // chass.pidTurn(90, 500, _90);
-    // chass.profiledDrive(-10, 0);
-    // chass.pidTurn(neg(10), 450, _45);
+    // for (int i = 0; i < 3; i++) {
+        // - new allign for push #2
+        chass.profiledDrive(22, 0, 0, 0);
+        chass.arcTurn(90, 4.6, 700, -1, _arc, 0, 'c');
+        chass.profiledDrive(10, 0, 0, 50);
+        chass.pidTurn(0, 500, _90);
 
-    // - push #2
+        // - push #2
+        glb::wpis2.set_value(true);
+        chass.timedDrive(800, -127);
+        pros::delay(200);
+        chass.pidTurn(neg(5), 600, _90);
+    // }
+
+    // - drive to side allign
+    glb::wpis2.set_value(false);
+    chass.profiledDrive(23, 0, 0, 0);
+    chass.pidTurn(88, 700, _90);
+    chass.profiledDrive(37, 0, 0, 0);
+
+    // - get balls from corner
+    // robot::wings.toggle();
+    chass.pidTurn(160, 600, _90);
+
+    // - allign side balls
+    // robot::wings.toggle();
+    chass.profiledDrive(15, 0, 0, 0);
+    chass.pidTurn(90, 500, _90);
+    glb::wpis1.set_value(true);
+    chass.profiledDrive(-15, 0, 0, 0);
+    glb::wpis1.set_value(false);
+
+    // - allign to push
+    chass.arcTurn(neg(0), 4.6, 200, 1, _arc, 20);
+    chass.arcTurn(neg(40), 4.6, 600, 1, _arc, 30);
+    // chass.arcTurn(90, 6, 400, -1, _arc, 20);
+    chass.profiledDrive(34, 10, 40, 0);
+    chass.pidTurn(0, 500, _90);
+
+    // - push
     robot::wings.toggle();
     chass.timedDrive(800, -127);
-    chass.pidTurn(0, 500, _45);
     robot::wings.toggle();
-    chass.pidTurn(90, 180, _90);
-    chass.pidTurn(177, 400, _90);
+
+    
+    // robot::wings.toggle();
+    // chass.pidTurn(90, 180, _90);
+    // chass.pidTurn(177, 400, _90);
+
 
     // - drive out and funnel balls
-    chass.profiledDrive(-20, 0, 0, 40);
-    chass.arcTurn(neg(90), 8, 600, 1, _arc, 30);
-    robot::wings.toggle();
-    chass.profiledDrive(-10, 0, 30, 0);
-    chass.pidTurn(15, 400, _90);
+    // chass.profiledDrive(20, 0, 0, 20);
+    // chass.arcTurn(neg(90), 5, 500, 1, _arc, 30, 'c');
+    // chass.profiledDrive(-50, 0, 30, 0);
+    // chass.arcTurn(10, 5, 600, 1, _arc, 30, 'c');
 
-    // - push #3
-    robot::wings.toggle();
-    chass.timedDrive(800, -127);
-    robot::wings.toggle();
+    // robot::wings.toggle();
+    // chass.timedDrive(800, -127);
+    // chass.pidTurn(0, 500, _45);
+    // robot::wings.toggle();
+
+    // glb::wpis1.set_value(true);
+    // chass.profiledDrive(17, 0, 30, 0);
+    // chass.profiledDrive(-20, 0, 0, 30);
+    // robot::wings.toggle();
+    // chass.arcTurn(90, 5, 600, -1, _arc, 30);
+    // chass.arcTurn(0, 5, 600, -1, _arc, 30);
+    // chass.profiledDrive(-20, 0, 30, 0);
 
     // chass.profiledDrive(25, 0);
     // robot::wings.toggle();
@@ -406,8 +454,10 @@ void skills() {
     // robot::wings.toggle();
     chass.arcTurn(100, 5, 700, -1, _arc, 30);
     chass.profiledDrive(40, 0, 30, 10);
+    glb::wpis2.set_value(true);
     chass.pidTurn(180, 200, _90);
     chass.pidTurn(neg(90), 200, _90);
+    glb::wpis2.set_value(false);
     chass.pidTurn(0, 500, _90);
     chass.arcTurn(90, 10, 800, 1, _arc);
     chass.profiledDrive(-20, 10);

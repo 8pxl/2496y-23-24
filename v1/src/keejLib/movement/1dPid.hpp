@@ -79,7 +79,7 @@ lib::pid lib::chassis::pidTurn(double target, double timeout, char brake, lib::p
 }
 
 //TODO: make radius actual units lol
-void lib::chassis::arcTurn(double target, double radius, double timeout, int dir, lib::pidConstants constants, double min = 0)
+void lib::chassis::arcTurn(double target, double radius, double timeout, int dir, lib::pidConstants constants, double min = 0, char brake = 'b')
 {
   lib::timer timer;
 
@@ -106,7 +106,7 @@ void lib::chassis::arcTurn(double target, double radius, double timeout, int dir
     else chass -> spinDiffy(-lvel, -rvel);
     pros::delay(10);
   }
-  chass -> stop('b');
+  chass -> stop(brake);
 }
 
 void lib::chassis::eulerTurn(double theta, double rate, double timeout, int dir, lib::pidConstants constants)

@@ -34,7 +34,7 @@ namespace lib
             // lib::pid keejTurn(double target, int timeout, lib::pidConstants constants, char brake);
 
 
-            void arcTurn(double target, double radius, double timeout, int dir, lib::pidConstants constants, double min); 
+            void arcTurn(double target, double radius, double timeout, int dir, lib::pidConstants constants, double min, char brake); 
             void eulerTurn(double theta, double rate, double timeout, int dir, lib::pidConstants constants);
 
             //1dmp
