@@ -21,7 +21,7 @@ namespace glb {
 //math for robot constants
 namespace robot {
     lib::diffy chassMtrs({-2, -3, -1, 9, 6, 10});
-    lib::mtrs intake({-5});
+    lib::mtrs intake({5});
     lib::mtrs blocker({-20});
     lib::mtrs cata({-8});
     lib::pis scraper({glb::spis}, false);

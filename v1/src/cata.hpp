@@ -70,35 +70,9 @@ namespace cata {
                     // std::cout << "vel: " << vel << std::endl;
                     robot::cata.spin(-30 - vel);
                 }
-
-                // if (!limit.get_value()) {
-                //     inRange.reset();
-                //     double error = abs(lib::minError(load/100, angle/100));
-                //     std::cout << error << std::endl;
-                    // if (error > 40) {
-                    //     robot::cata.spin(-127);
-                    // }
-                    // else {
-                    //     robot::cata.spin(-48 - (kp * error));
-                    // }
-                // }
-                // else {
-                //     if (angle > load) {
-                //         robot::cata.spin(-50);
-                //         inRange.reset();
-                //     }
-                //     else {
-                //         if (inRange.time() > 230) {
-                //             robot::cata.stop('c');
-                //             state = idle;
-                //         }
-                //     }
-                // }
                 break;
 
             case idle:
-                // std::cout << "idle" << std::endl;
-                // robot::cata.spin(0);
                 break;
 
             case half:
