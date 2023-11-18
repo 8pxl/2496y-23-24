@@ -92,16 +92,43 @@ void lib::chassis::profiledDrive(double target, int endDelay = 500, double start
   pros::delay(endDelay);
 }
 
+// void lib::chassis::profiledTurn(double target, int dir, int endDelay = 500)
+// {
+//   //kv: rpm -> voltage
+//   //sf: in/ms -> rpm
+//   std::vector<double> profile = asymTrapezoidalProfile(target, angular.maxSpeed, angular.fwdAccel,  angular.fwdDecel, 0,0);
+//   chass -> reset();
+//   std::cout << profile.size() << std::endl;
+//   for (int i = 0; i < profile.size(); i++)
+//   {
+//     double vel = profile[i] * angular.velToVolt * dir;
+//     chass -> spinDiffy(vel, -vel);
+//     pros::delay(10);
+//   }
+//   chass -> stop('b');
+//   pros::delay(endDelay);
+// }
+
 void lib::chassis::profiledTurn(double target, int dir, int endDelay = 500)
 {
   //kv: rpm -> voltage
-  //sf: in/ms -> rpm
-  std::vector<double> profile = asymTrapezoidalProfile(target, angular.maxSpeed, angular.fwdAccel,  angular.fwdDecel, 0,0);
+  //sf: in/ms -> rpma
+  // double error = lib::minError(target, imu -> get_heading());
+  double error = target;
+  dir = lib::sign(error);
+  double amt = lib::dtr(std::abs(error));
+  double rot = constants.horizTrack * amt;
+  std::vector<double> profile = asymTrapezoidalProfile(rot, linear.maxSpeed, linear.fwdAccel, linear.fwdDecel, 0, 0);
   chass -> reset();
-  std::cout << profile.size() << std::endl;
+  double prev = 0;
   for (int i = 0; i < profile.size(); i++)
   {
-    double vel = profile[i] * angular.velToVolt * dir;
+    // double currVel = chass -> getSpeed(true);
+    // std::cout << (profile[i] - linear.rpmToVel * currVel) << std::endl;
+    // double vel = (dir * profile[i] * linear.kv) + (linear.ka * (profile[i] - prev)) + (linear.kp * (profile[i] - (currVel - prevVel)));
+    // double vel = ((dir * profile[i] * linear.kv) + (linear.ka * (profile[i]-prev)) + (linear.kp * ((profile[i] - linear.rpmToVel * currVel))));
+    double vel = profile[i] * linear.velToVolt;
+    // prev = profile[i];
     chass -> spinDiffy(vel, -vel);
     pros::delay(10);
   }
