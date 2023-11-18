@@ -4,7 +4,7 @@
 #include "keejLib/lib.hpp"
 
 #define MAX_LIN 0.647953484803
-#define MAX_ANG 0.796332147963
+#define MAX_ANG 0.647953484803
 
 namespace glb {
     //pros

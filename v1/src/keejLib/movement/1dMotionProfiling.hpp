@@ -96,7 +96,7 @@ void lib::chassis::profiledTurn(double target, int dir, int endDelay = 500)
 {
   //kv: rpm -> voltage
   //sf: in/ms -> rpm
-  std::vector<double> profile = asymTrapezoidalProfile(target, angular.maxSpeed, angular.fwdAccel,  angular.fwdDecel);
+  std::vector<double> profile = asymTrapezoidalProfile(target, angular.maxSpeed, angular.fwdAccel,  angular.fwdDecel, 0,0);
   chass -> reset();
   std::cout << profile.size() << std::endl;
   for (int i = 0; i < profile.size(); i++)
