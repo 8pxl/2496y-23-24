@@ -17,7 +17,9 @@ void driver() {
         }
         
         else {
-            if (state[NL1]) cata::fire();
+            // if (state[NL1]) cata::fire();
+            if (state[L1]) glb::spis.set_value(true);
+            else glb::spis.set_value(false);
             if (state[NB]) cata::halfway();
             if (state[NA]) cata::toggle();
 

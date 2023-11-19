@@ -88,7 +88,7 @@ void lib::chassis::profiledDrive(double target, int endDelay = 500, double start
     chass -> spin(profile[i] * linear.velToVolt * sign);
     pros::delay(10);
   }
-  chass -> stop('b');
+  // chass -> stop('b');
   pros::delay(endDelay);
 }
 
