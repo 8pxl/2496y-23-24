@@ -19,7 +19,7 @@ namespace lib
             void stop(char brakeMode);
             void setBrake(char brakeMode);
             void reset();
-            double getSpeed();
+            double getSpeed(bool abs);
             double getRotation();
             double getEfficiency();
     };

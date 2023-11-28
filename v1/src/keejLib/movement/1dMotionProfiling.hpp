@@ -7,7 +7,7 @@ std::vector<double> lib::chassis::asymTrapezoidalProfile(double dist, double max
   double a = ((1 / (2*accel)) + (1 / (2*decel)));
   double c1= (-pow(start, 2) / (2*accel)) - (pow(end, 2) / (2*decel));
   double c = c1 - dist;
-  double max = std::min((2 * std::sqrt(-a*c) / 2*a), maxSpeed);
+  double max = std::min((std::sqrt(-a*c) / a), maxSpeed);
   double accelTime = (max-start) / accel;
   double decelTime = (max-end) / decel;
   double coastDist = dist - (a * pow(max, 2)) - c1;
@@ -186,9 +186,12 @@ void lib::chassis::profiledDrive(double target, int endDelay = 500, double start
   if(sign > 0) profile = asymTrapezoidalProfile(target, linear.maxSpeed, linear.fwdAccel, linear.fwdDecel, start, end);
   else profile = asymTrapezoidalProfile(target, linear.maxSpeed, linear.revAccel, linear.revDecel, start, end);
   chass -> reset();
+  double prev = 0;
   for (int i = 0; i < profile.size(); i++)
   {
-    chass -> spin(profile[i] * linear.velToVolt * sign);
+    double vel = (sign * profile[i] * linear.kv) + (linear.ka * (profile[i] - prev)) + (linear.kp * profile[i]);
+    prev = profile[i];
+    chass -> spin(vel);
     pros::delay(10);
   }
   // chass -> stop('b');
@@ -199,11 +202,13 @@ void lib::chassis::profiledDrive(double target, int endDelay = 500, double start
 void lib::chassis::profiledTurn(double target, int endDelay = 500)
 {
   //kv: rpm -> voltage
-  //sf: in/ms -> rpm
-  double error = lib::minError(target, imu -> get_heading());
+  //sf: in/ms -> rpma
+  // double error = lib::minError(target, imu -> get_heading());
+  double error = target;
   int dir = lib::sign(error);
   double amt = lib::dtr(std::abs(error));
   double rot = constants.vertTrack * amt;
+<<<<<<< HEAD
   std::vector<double> profile = asymTrapezoidalProfile(amt, linear.maxSpeed, linear.fwdAccel,  linear.fwdDecel, 0, 0);
 =======
 // void lib::chassis::profiledTurn(double target, int dir, int endDelay = 500)
@@ -234,10 +239,14 @@ void lib::chassis::profiledTurn(double target, int dir, int endDelay = 500)
   double rot = constants.horizTrack * amt;
   std::vector<double> profile = asymTrapezoidalProfile(rot, linear.maxSpeed, linear.fwdAccel, linear.fwdDecel, 0, 0);
 >>>>>>> main
+=======
+  std::vector<double> profile = asymTrapezoidalProfile(rot, linear.maxSpeed, linear.fwdAccel, linear.fwdDecel, 0, 0);
+>>>>>>> some-testing
   chass -> reset();
   double prev = 0;
   for (int i = 0; i < profile.size(); i++)
   {
+<<<<<<< HEAD
 <<<<<<< HEAD
     double vel = profile[i] * linear.velToVolt * dir;
 =======
@@ -248,6 +257,13 @@ void lib::chassis::profiledTurn(double target, int dir, int endDelay = 500)
     double vel = profile[i] * linear.velToVolt;
     // prev = profile[i];
 >>>>>>> main
+=======
+    double currVel = chass -> getSpeed(true);
+    std::cout << (profile[i] - linear.rpmToVel * currVel) << std::endl;
+    // double vel = (dir * profile[i] * linear.kv) + (linear.ka * (profile[i] - prev)) + (linear.kp * (profile[i] - (currVel - prevVel)));
+    double vel = ((dir * profile[i] * linear.kv) + (linear.ka * (profile[i]-prev)) + (linear.kp * ((profile[i] - linear.rpmToVel * currVel))));
+    prev = profile[i];
+>>>>>>> some-testing
     chass -> spinDiffy(vel, -vel);
     pros::delay(10);
   }

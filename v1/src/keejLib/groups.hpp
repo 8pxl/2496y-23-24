@@ -47,13 +47,15 @@ void lib::mtrs::setBrake(char brakeMode)
     }
 }
 
-double lib::mtrs::getSpeed() 
+double lib::mtrs::getSpeed(bool abs = false) 
 {
     double vel = 0;
 
     for (int i=0; i < size; i++)
     {
-        vel += motors[i].get_actual_velocity();
+        double mVal = motors[i].get_actual_velocity();
+        if (abs) vel += std::abs(mVal);
+        else vel += mVal;
     }
     
     return(vel/size);

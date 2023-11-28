@@ -54,6 +54,10 @@ int lib::timer::time()
 {
     return (pros::millis() - startTime);
 }
+double lib::velController::out(double target, double curr, double accel) 
+{
+    return (constants.kv * target + constants.ka * accel + constants.kp * curr);
+}
 
 // - pid
 double lib::pid::out(double error)

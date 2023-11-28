@@ -42,7 +42,7 @@ namespace lib
     struct pidConstants{double p,i,d,tolerance,integralThreshold, maxIntegral;};
 
     struct robotConstants{double horizTrack, vertTrack, trackDia;};
-    struct accelConstants{double maxSpeed, fwdAccel, fwdDecel, revAccel, revDecel, velToVolt;};
+    struct accelConstants{double maxSpeed, fwdAccel, fwdDecel, revAccel, revDecel, rpmToVel, kv, kp, ka;};
     //distance per 10 ms to motor volt
     struct atns{std::vector<fptr> autonsList; std::vector<std::string> names; };
 
@@ -89,6 +89,16 @@ namespace lib
 
             double out(double error);
             double getDerivative();
+    };
+
+    class velController
+    {
+        private:
+            accelConstants constants;
+        public:
+            velController(accelConstants cons) : constants(cons){}
+            
+            double out(double target, double curr, double accel);
     };
 
     class cubicBezier 
