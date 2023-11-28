@@ -18,7 +18,6 @@ namespace lib
             double prevRotation = 0;
 
         public:
-            double last;
             lib::odomType odom;
             chassis(lib::diffy& mtrs, pros::Imu& imu) : chass(&mtrs), imu(&imu){}
             chassis(lib::diffy& mtrs, pros::Imu& imu, lib::robotConstants constants, lib::accelConstants linear, lib::accelConstants angular) : chass(&mtrs), imu(&imu), constants(constants), linear(linear), angular(angular) {}
@@ -35,15 +34,13 @@ namespace lib
             // lib::pid keejTurn(double target, int timeout, lib::pidConstants constants, char brake);
 
 
-            void arcTurn(double target, double radius, double timeout, int dir, lib::pidConstants constants, double min); 
+            void arcTurn(double target, double radius, double timeout, int dir, lib::pidConstants constants, double min, char brake); 
             void eulerTurn(double theta, double rate, double timeout, int dir, lib::pidConstants constants);
 
             //1dmp
-            // std::vector<double> asymTrapezoidalProfile(double dist, double maxSpeed, double accel, double decel);
             std::vector<double> asymTrapezoidalProfile(double dist, double maxSpeed, double accel, double decel, double start, double end);
-            // void profiledDrive(double target, int endDelay);
             void profiledDrive(double target, int endDelay, double start, double end);
-            void profiledTurn(double target, int endDelay);
+            void profiledTurn(double target, int dir, int endDelay);
             void timedDrive(int time, int speed);
 
 

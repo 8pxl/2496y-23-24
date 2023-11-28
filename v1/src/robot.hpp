@@ -4,7 +4,7 @@
 #include "keejLib/lib.hpp"
 
 #define MAX_LIN 0.647953484803
-#define MAX_ANG 0.796332147963
+#define MAX_ANG 0.647953484803
 
 namespace glb {
     //pros
@@ -23,7 +23,7 @@ namespace glb {
 //ex: vel -> inches / 10 ms
 namespace robot {
     lib::diffy chassMtrs({-2, -3, -1, 9, 6, 10});
-    lib::mtrs intake({-5});
+    lib::mtrs intake({5});
     lib::mtrs blocker({-20});
     lib::mtrs cata({-8});
     lib::pis scraper({glb::spis}, false);
