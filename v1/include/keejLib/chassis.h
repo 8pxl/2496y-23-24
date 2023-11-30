@@ -14,6 +14,7 @@ namespace lib
             lib::robotConstants constants;
             lib::accelConstants linear;
             lib::accelConstants angular;
+            lib::pidConstants angCons;
             pros::Task* odomTask = nullptr;
             double prevRotation = 0;
 
@@ -21,7 +22,7 @@ namespace lib
             lib::odomType odom;
             chassis(lib::diffy& mtrs, pros::Imu& imu) : chass(&mtrs), imu(&imu){}
             chassis(lib::diffy& mtrs, pros::Imu& imu, lib::robotConstants constants, lib::accelConstants linear, lib::accelConstants angular) : chass(&mtrs), imu(&imu), constants(constants), linear(linear), angular(angular) {}
-            chassis(lib::diffy& mtrs, pros::Imu& imu, std::vector<int> encoderPorts, lib::robotConstants constants, lib::accelConstants linear, lib::accelConstants angular);
+            chassis(lib::diffy& mtrs, pros::Imu& imu, std::vector<int> encoderPorts, lib::robotConstants constants, lib::accelConstants linear, lib::accelConstants angularm, lib::pidConstants angAdjust);
             
             void updatePos();
             void initTracking();

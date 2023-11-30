@@ -3,13 +3,8 @@
 #include "main.h"
 #include "keejLib/lib.hpp"
 
-<<<<<<< HEAD
 #define MAX_LIN 0.647953484803
 #define MAX_ANG 0.647953484803
-=======
-#define MAX_LIN 0.628318530718
-#define MAX_ANG 0.628318530718
->>>>>>> some-testing
 
 namespace glb {
     //pros
@@ -27,13 +22,8 @@ namespace glb {
 //units: inches and 10 ms,
 //ex: vel -> inches / 10 ms
 namespace robot {
-<<<<<<< HEAD
     lib::diffy chassMtrs({-2, -3, -1, 9, 6, 10});
     lib::mtrs intake({5});
-=======
-    lib::diffy chassMtrs({21, -19, -20, -14, 13, 11});
-    lib::mtrs intake({-5});
->>>>>>> some-testing
     lib::mtrs blocker({-20});
     lib::mtrs cata({-8});
     lib::pis scraper({glb::spis}, false);
@@ -53,7 +43,7 @@ namespace robot {
             .revAccel = MAX_LIN / 18,
             .revDecel = MAX_LIN / 32,
             .rpmToVel = 0.0010471975512,
-            .kv = 202.126777727,
+            .kv = 127 / MAX_Lin,
             .kp = 630,
             .ka = 100,
         }, {
@@ -66,7 +56,14 @@ namespace robot {
             .kv = 127 / MAX_ANG,
             .kp = 0.35,
             .ka = 0.5,
-        }
+        }, {
+            .p = 5.9, 
+            .i = 0.6, 
+            .d = 70, 
+            .tolerance = 0.05, 
+            .integralThreshold = 1.1, 
+            .maxIntegral = 20
+        } 
     );
 }
 
