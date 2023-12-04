@@ -91,13 +91,14 @@ pidConstants _arc {
 void test1() {
     // chass.pidDrive(1000, 1500, linear);
     // chass.arcTurn(90, 12, 1400, 1, _arc, 20);
-    // chass.profiledDrive(25, 0, 0, 0);    
-    chass.profiledTurn(90,1);
+    chass.profiledDrive(30, 0, 0, 0);    
+    // chass.profiledTurn(90,1);
     // chass.arcTurn(90, 12, 1400, 1, _arc);
     // chass.eulerTurn(90, 0.005, 1200, 1, _arc);
 }
 
 void test2() {
+    chass.profiledTurn(90,1);
     // chass.arcTurn()
     // chass.pidTurn(90, 4000, _90);
     // chass.pidTurn(45, 4000, _45);
@@ -257,9 +258,9 @@ void skills() {
     chass.profiledDrive(3);
     robot::blocker.spin(0);
     lib::timer t1;
-    while (t1.time() < 30000) {
-        robot::cata.spin(-127);
-    }
+    // while (t1.time() < 30000) {
+    //     robot::cata.spin(-127);
+    // }
     robot::scraper.toggle();
     robot::cata.stop('c');
     chass.arcTurn(60, 6.7, 600, 1, _arc, 30);

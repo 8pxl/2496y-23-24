@@ -1,5 +1,7 @@
 #pragma once
 #include "../include/keejLib/lib.h"
+ #include <numeric>
+
 
 std::vector<double> lib::chassis::asymTrapezoidalProfile(double dist, double maxSpeed, double accel, double decel, double start, double end)
 {
@@ -36,6 +38,9 @@ std::vector<double> lib::chassis::asymTrapezoidalProfile(double dist, double max
       vel -= decel;
     }
   }
+  // for(int i = 0; i < 6; i++) {
+  //   profile.push_back(0);
+  // }
   return profile;
 } 
 
@@ -125,47 +130,61 @@ void lib::chassis::profiledDrive(double target, int endDelay = 500, double start
   else profile = asymTrapezoidalProfile(target, linear.maxSpeed, linear.revAccel, linear.revDecel, start, end);
   chass -> reset();
   double prev = 0;
+  std::vector<int> sma;
   for (int i = 0; i < profile.size(); i++)
   {
-    double vel = (sign * profile[i] * linear.kv) + (linear.ka * (profile[i] - prev)) + (linear.kp * (profile[i] - linear.rpmToVel * chass -> getSpeed(true)));
+    double currVel = (chass -> getSpeed(true)) * linear.rpmToVel;
+    if (sma.size() < 5) sma.push_back(currVel);
+    else sma[i%5] = currVel;
+    double vel = (sign * profile[i] * linear.kv) + (linear.ka * (profile[i] - prev)) + (linear.kp * (profile[i] - currVel));
+    std::cout << profile[i] << ", " << currVel << ", " << vel << ", ";
     prev = profile[i];
     chass -> spin(vel);
     pros::delay(10);
   }
-  // chass -> stop('b');
+  std::cout << std::endl;
+  chass -> stop('b');
   pros::delay(endDelay);
 }
 
-void lib::chassis::profiledTurn(double target, int dir, int endDelay = 300)
+void lib::chassis::profiledTurn(double target, int endDelay = 300)
 {
   double error = lib::minError(target, imu -> get_heading());
-  dir = lib::sign(error);
+  int dir = -lib::sign(error);
   double amt = lib::dtr(std::abs(error));
   double rot = constants.horizTrack * amt;
+  // std::cout << error << std::endl;
   std::vector<double> profile = asymTrapezoidalProfile(rot, linear.maxSpeed, linear.fwdAccel, linear.fwdDecel, 0, 0);
   chass -> reset();
   double prev = 0;
+  std::vector<int> sma;
   for (int i = 0; i < profile.size(); i++)
   {
-    double currVel = chass -> getSpeed(true);
-    std::cout << (profile[i] - linear.rpmToVel * currVel) << std::endl;
+    double currVel = (chass -> getSpeed(true)) * angular.rpmToVel;
+    if (sma.size() < 8) sma.push_back(currVel);
+    else sma[i%8] = currVel;
+    currVel = std::accumulate(sma.begin(), sma.end(), 0) / sma.size();
+    // std::cout << (profile[i] - linear.rpmToVel * currVel) << std::endl;
     // double vel = (dir * profile[i] * linear.kv) + (linear.ka * (profile[i] - prev)) + (linear.kp * (profile[i] - (currVel - prevVel)));
-    double vel = ((dir * profile[i] * linear.kv) + (linear.ka * (profile[i]-prev)) + (linear.kp * ((profile[i] - linear.rpmToVel * currVel))));
+    double vel = ((dir * profile[i] * angular.kv) + (angular.ka * (profile[i]-prev)) + (angular.kp * ((profile[i] - angular.rpmToVel * currVel))));
+    std::cout << profile[i] << ", " << currVel << ", " << vel << ", ";
     prev = profile[i];
+    // double vel = dir * profile[i];
     chass -> spinDiffy(vel, -vel);
     pros::delay(10);
   }
+  std::cout << std::endl;
 
-  // chass -> stop('b');
-  lib::timer timer;
-  lib::pid pidController(angCons, target);
-  while(timer.time() < endDelay)
-  {
-    double vel = pidController.out(lib::minError(target, imu -> get_heading()));
-    chass -> spinDiffy(-vel, vel);
-    pros::delay(10);
-  }
   chass -> stop('b');
+  // lib::timer timer;
+  // lib::pid pidController(angCons, target);
+  // while(timer.time() < endDelay)
+  // {
+  //   double vel = pidController.out(lib::minError(target, imu -> get_heading()));
+  //   chass -> spinDiffy(-vel, vel);
+  //   pros::delay(10);
+  // }
+  // chass -> stop('b');
 }
 
 void lib::chassis::timedDrive(int time, int speed) {

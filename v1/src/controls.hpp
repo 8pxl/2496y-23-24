@@ -11,8 +11,8 @@ void driver() {
 
     if(state[L2]) {
         if (state[L1]) robot::wings.setState(true);
-        if (state[R1]) robot::blocker.spin(127);
-        else if (state[R2]) robot::blocker.spin(-127);
+        if (state[R1]) robot::blocker.spin(80);
+        else if (state[R2]) robot::blocker.spin(-80);
         else robot::blocker.stop('h');
     }
     
@@ -39,4 +39,4 @@ void driver() {
 
     cata::cataControl();
     pros::delay(20);
-}
+}   

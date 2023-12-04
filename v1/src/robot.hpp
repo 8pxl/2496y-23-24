@@ -8,7 +8,7 @@
 
 namespace glb {
     //pros
-    pros::Imu imu(17);
+    pros::Imu imu(13);
     pros::ADIDigitalOut wpis1('B');
     pros::ADIDigitalOut wpis2('H');
     pros::ADIDigitalOut spis('C');
@@ -38,14 +38,14 @@ namespace robot {
             .trackDia = 0,
         }, {
             .maxSpeed = MAX_LIN,
-            .fwdAccel = MAX_LIN / 20,
-            .fwdDecel = MAX_LIN / 20,
-            .revAccel = MAX_LIN / 18,
-            .revDecel = MAX_LIN / 32,
+            .fwdAccel = MAX_LIN / 45,
+            .fwdDecel = MAX_LIN / 70,
+            .revAccel = MAX_LIN / 35,
+            .revDecel = MAX_LIN / 35,
             .rpmToVel = 0.0010471975512,
-            .kv = 127 / MAX_Lin,
-            .kp = 630,
-            .ka = 100,
+            .kv = 127 / MAX_LIN,
+            .kp = 480,
+            .ka = 2600,
         }, {
             .maxSpeed = MAX_ANG,
             .fwdAccel = MAX_ANG / 40,
@@ -54,8 +54,8 @@ namespace robot {
             .revDecel = MAX_ANG / 40,
             .rpmToVel = 0.0010471975512,
             .kv = 127 / MAX_ANG,
-            .kp = 0.35,
-            .ka = 0.5,
+            .kp = 0,
+            .ka = 0,
         }, {
             .p = 5.9, 
             .i = 0.6, 
