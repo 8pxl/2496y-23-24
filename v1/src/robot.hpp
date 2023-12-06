@@ -12,7 +12,9 @@ namespace glb {
     pros::ADIDigitalOut wpis1('B');
     pros::ADIDigitalOut wpis2('H');
     pros::ADIDigitalOut spis('C');
-    pros::ADIButton limit('G');
+    pros::ADIDigitalOut vpis1('E');
+    pros::ADIDigitalOut vpis2('F');
+    pros::ADIButton limit(-1);
     pros::Controller controller(pros::E_CONTROLLER_MASTER);
     pros::Rotation rot(19);
 }
@@ -24,13 +26,14 @@ namespace robot {
     lib::mtrs intake({5});
     lib::mtrs blocker({-20});
     lib::mtrs cata({-8});
-    lib::pis scraper({glb::spis}, false);
+    lib::pis scraper({glb::spis}, true);
     lib::pis wings({glb::wpis1, glb::wpis2}, false);
+    lib::pis vwings({glb::vpis1, glb::vpis2}, false);
     lib::controller controller(glb::controller);
     lib::chassis chass (
         chassMtrs, 
         glb::imu, 
-        {6, 8}, {
+        {-1, -1}, {
             .horizTrack = 5.53532 + 5.25712, 
             .vertTrack = (5.53532 + 5.25712)/2,
             .trackDia = 0,

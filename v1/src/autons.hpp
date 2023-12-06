@@ -263,6 +263,53 @@ void reach_far() {
     robot::blocker.stop('c');
 }
 
+void new_far() {
+    robot::blocker.spin(80);
+    glb::wpis1.set_value(true);
+    pros::delay(300);
+    robot::blocker.spin(-70);
+    glb::wpis1.set_value(false);
+    pros::delay(260);
+    robot::intake.spin(127);
+    robot::blocker.spin(0);
+    chass.profiledDrive(22, 200);
+    robot::intake.spin(40);
+    chass.profiledDrive(-27, 0, 0, 50);
+    chass.arcTurn(neg(45), 5.3, 340, -1, _arc, 30);
+    glb::vpis1.set_value(true);
+    chass.profiledDrive(-20, 10, 0, 0);
+    chass.pidTurn(neg(70), 400, _135);
+    glb::vpis1.set_value(false);
+    robot::intake.spin(-127);
+    chass.arcTurn(90, 11.9, 750, 1, _arc, 0);
+    glb::vpis2.set_value(true);
+    chass.timedDrive(400, 100);
+    glb::vpis2.set_value(false);
+    chass.profiledDrive(-10, 0, 0, 0);
+    chass.timedDrive(400, 100);
+    pros::delay(200);
+    chass.arcTurn(27.5, 6, 630, -1, _arc, 0);
+    robot::intake.spin(127);
+    chass.profiledDrive(39, 200);
+    chass.pidTurn(150, 460, _90);
+    robot::intake.spin(-127);
+    chass.profiledDrive(7, 300);
+    // pros::delay(450);
+    robot::intake.spin(127);
+    chass.pidTurn(64, 400, _90);
+    chass.profiledDrive(24, 200, 0, 10);
+    chass.pidTurn(180, 500, _45);
+    robot::intake.spin(-127);
+    robot::vwings.toggle();
+    chass.timedDrive(750, 127);
+    chass.profiledDrive(-11, 10, 0, 0);
+    chass.timedDrive(760, 90);
+    chass.pidTurn(180, 500, _90);
+    robot::blocker.spin(40);
+    chass.profiledDrive(-20, 200, 0, 0);
+    chass.pidTurn(neg(90), 500, _90);
+    robot::blocker.stop('c');
+}
 void safe_near() {
     robot::scraper.toggle();
     robot::blocker.spin(70);
@@ -296,6 +343,19 @@ void safe_near() {
     robot::blocker.spin(0);
 }
 
+void new_near() {
+    // chass.arcTurn(neg(90), 14, 1300, -1, _arc);
+    // chass.timedDrive(800, 127);
+    // chass.arcTurn(180, 11, 1300, -1, _arc);
+    glb::vpis1.set_value(true);
+    robot::intake.spin(-127);
+    chass.arcTurn(0, 3.8, 1300, -1, _arc);
+    glb::vpis1.set_value(false);
+    robot::blocker.spin(50);
+    chass.profiledDrive(-14, 200);
+    robot::blocker.spin(0);
+}
+
 void safe_far() {
     // robot::scraper.toggle();
     robot::blocker.spin(80);
@@ -310,20 +370,20 @@ void safe_far() {
 }
 void skills() {
     /**/
-    robot::scraper.toggle();
+    // robot::scraper.toggle();
     robot::blocker.spin(70);
     robot::intake.spin(-127);
     chass.profiledDrive(14, 130);
-    robot::scraper.toggle();
+    // robot::scraper.toggle();
     robot::blocker.spin(-50);
     chass.pidTurn(neg(17.8), 1000, _15);
     // robot::scraper.toggle();
     chass.profiledDrive(3);
     robot::blocker.spin(0);
     lib::timer t1;
-    while (t1.time() < 30000) {
-        robot::cata.spin(-127);
-    }
+    // while (t1.time() < 30000) {
+    //     robot::cata.spin(-127);
+    // }
     // robot::scraper.toggle();
     robot::cata.stop('c');
 
@@ -508,6 +568,6 @@ void calcTrack() {
 
 //creates list of auton function pointers and names - useful for auton selector
 lib::atns autons = {
-    {test1, test2, six_far, safe_far, calcTrack, safe_near, skills, rush_far, reach_far, rush_near}, 
-    {"test", "test2", "six_far", "safe_far", "track", "safe_near", "skills", "rush_far", "reach_far", "rush_near"}
+    {test1, test2, six_far, safe_far, calcTrack, safe_near, skills, rush_far, reach_far, rush_near, new_far, new_near}, 
+    {"test", "test2", "six_far", "safe_far", "track", "safe_near", "skills", "rush_far", "reach_far", "rush_near", "new_far", "new_near"}
 };

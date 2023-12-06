@@ -10,15 +10,16 @@ void driver() {
     robot::chassMtrs.spinDiffy(robot::controller.drive(1, lib::controller::arcade));
 
     if(state[L2]) {
-        if (state[L1]) robot::wings.setState(true);
-        if (state[R1]) robot::blocker.spin(127);
-        else if (state[R2]) robot::blocker.spin(-127);
+        if (state[R2]) robot::blocker.spin(50);
+        else if (state[R1]) robot::blocker.spin(-50);
         else robot::blocker.stop('h');
+        if(state[L1]) robot::vwings.setState(true);
     }
     
     else {
-        if (state[L1]) glb::spis.set_value(true);
-        else glb::spis.set_value(false);
+        // if (state[L1]) glb::spis.set_value(true);
+        // else glb::spis.set_value(false);
+        if (state[L1]) robot::wings.setState(true);
         if (state[NB]) cata::halfway();
         if (state[NA]) cata::toggle();
 
@@ -36,6 +37,7 @@ void driver() {
     }
     
     if(!state[L1]) robot::wings.setState(false);
+    if(!state[L1]) robot::vwings.setState(false);
 
     cata::cataControl();
     pros::delay(20);
