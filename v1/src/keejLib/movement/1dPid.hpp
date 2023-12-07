@@ -79,17 +79,19 @@ lib::pid lib::chassis::pidTurn(double target, double timeout, char brake, lib::p
 }
 
 //TODO: make radius actual units lol
-void lib::chassis::arcTurn(double target, double radius, double timeout, int dir, lib::pidConstants constants, double min = 0, char brake = 'b')
+void lib::chassis::arcTurn(double target, double radius, double timeout, int dir, lib::pidConstants constants, double min = 0, int endTime = 0,char brake = 'b')
 {
   lib::timer timer;
+  lib::timer end;
 
   double curr = imu -> get_heading();
   double theta = lib::dtr(lib::minError(target, curr));
   double sl = theta * (radius + this -> constants.vertTrack);
   double sr = theta * (radius - this -> constants.vertTrack);
-
   double ratio = sl/sr;
   lib::pid controller(constants, 0);
+  int last = lib::sign(controller.out(lib::minError(target, curr)));
+  bool ending = false;
 
   while (timer.time() < timeout)
   {
@@ -104,6 +106,15 @@ void lib::chassis::arcTurn(double target, double radius, double timeout, int dir
 
     if(lib::sign(dir) == 1) chass -> spinDiffy(rvel, lvel);
     else chass -> spinDiffy(-lvel, -rvel);
+    if((lib::sign(vel) != last && min > 0) || ending) {
+      ending = true;
+      if(end.time() > endTime) {
+        return;
+      }
+    }
+    else {
+      end.reset();
+    }
     pros::delay(10);
   }
   chass -> stop(brake);
@@ -119,8 +130,8 @@ void lib::chassis::eulerTurn(double theta, double rate, double timeout, int dir,
   {
     curvature += rate;
     double curr = imu -> get_heading();
-    double sl = theta * (1/curvature + this -> constants.vertTrack);
-    double sr = theta * (1/curvature - this -> constants.vertTrack);
+    double sl = theta * (1/curvature + this -> constants.horizTrack);
+    double sr = theta * (1/curvature - this -> constants.horizTrack);
     double ratio = sl/sr;
 
     double vel = controller.out(lib::minError(theta, curr));
