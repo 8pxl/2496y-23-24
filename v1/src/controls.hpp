@@ -13,7 +13,10 @@ void driver() {
         if (state[R2]) robot::blocker.spin(50);
         else if (state[R1]) robot::blocker.spin(-50);
         else robot::blocker.stop('h');
-        if(state[L1]) robot::vwings.setState(true);
+        if(state[L1]) {
+            robot::vwings.setState(true);
+            robot::intake.spin(127);
+        }
     }
     
     else {
@@ -25,7 +28,7 @@ void driver() {
 
         if (state[R1]) robot::intake.spin(127);
         else if (state[R2]) robot::intake.spin(-127);
-        else robot::intake.stop('c');
+        else if(!state[L1]) robot::intake.stop('c');
 
         if (state[X]) robot::blocker.stop('c');
 

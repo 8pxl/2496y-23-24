@@ -50,25 +50,13 @@ namespace cata {
             case reloading:
                 // std::cout << "reloading" << std::endl;
                 // std::cout << inRange.time() << std::endl;
-                if (!limit.get_value() && error > 20) {
-                    inRange.reset();
+                double vel = pid.out(error);
+                if (vel < 0) {
+                    vel = 0;
                 }
-                if (inRange.time() > 400) {
-                    robot::cata.spin(0);
-                    robot::cata.stop('c');
+                robot::cata.spin(vel);
+                if(fabs(error) < 20) {
                     state = idle;
-                }
-                if (fabs(error) > 40) {
-                    // std::cout << "error: " << error << std::endl; 
-                    robot::cata.spin(-127);
-                }
-                else {
-                    double vel = pid.out(error);
-                    if (vel < 0) {
-                        vel = 0;
-                    }
-                    // std::cout << "vel: " << vel << std::endl;
-                    robot::cata.spin(-30 - vel);
                 }
                 break;
 
