@@ -15,6 +15,7 @@ namespace cata {
         idle,
         toggeled,
         delayed,
+        off
     };
     
     cataState state = idle;
@@ -51,17 +52,22 @@ namespace cata {
             case reloading:
                 // std::cout << "reloading" << std::endl;
                 // std::cout << inRange.time() << std::endl;
-                vel = pid.out(error);
-                if (vel < 0) {
-                    vel = -127;
-                }
-                robot::cata.spin(vel);
                 if(fabs(error) < 20) {
                     state = idle;
+                }
+                else {
+                    vel = pid.out(error);
+                    if (vel < 0) {
+                        vel = 127;
+                    }
+                    robot::cata.spin(-vel);
                 }
                 break;
 
             case idle:
+                if (error < 0) {
+                    state = reloading;
+                }
                 break;
 
             case half:
@@ -78,12 +84,8 @@ namespace cata {
                 robot::cata.spin(-127);
                 break;
                 
-            case delayed:
-                if (delay.time() < 300) robot::cata.stop('b');
-                else {
-                    state = reloading;
-                    inRange.reset();
-                }
+            case off:
+                robot::cata.stop('c');
                 break;
         }
     }
@@ -106,6 +108,15 @@ namespace cata {
         }
         else {
             state = toggeled;
+        }
+    }
+
+    void cut() {
+        if(state == off) {
+            state = reloading;
+        }
+        else {
+            state = off;
         }
     }
 }

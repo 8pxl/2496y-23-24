@@ -26,7 +26,7 @@ void driver() {
         // if (state[L1]) glb::spis.set_value(true);
         // else glb::spis.set_value(false);
         if (state[L1]) robot::wings.setState(true);
-        if (state[NB]) cata::halfway();
+        if (state[NB]) cata::cut();
         if (state[NA]) cata::toggle();
 
         if (state[R1]) robot::intake.spin(127);
