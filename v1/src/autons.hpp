@@ -421,17 +421,19 @@ void skills() {
     chass.profiledDrive(14, 130);
     // robot::scraper.toggle();
     robot::blocker.spin(-50);
-    chass.pidTurn(neg(22.6), 1000, _15);
+    chass.pidTurn(neg(22.6), 900, _15);
     // robot::scraper.toggle();
     robot::blocker.spin(0);
-    chass.profiledDrive(1);
+    // chass.profiledDrive(1);
     lib::timer t1;
-    // while (t1.time() < 29200) {
-    //     if(t1.time() >= 18000 && t1.time() < 20000) {
-    //         chass.pidTurn(neg(17.8), 1000, _15);
-    //     }
-    //     robot::cata.spin(-127);
-    // }
+    glb::vpis2.set_value(true);
+    while (t1.time() < 29200) {
+        if(t1.time() >= 18000 && t1.time() < 20000) {
+            chass.pidTurn(neg(17.8), 1000, _15);
+        }
+        robot::cata.spin(-127);
+    }
+    glb::vpis2.set_value(false);
     // robot::scraper.toggle();
     robot::cata.stop('c');
     robot::intake.spin(-127);
@@ -446,8 +448,8 @@ void skills() {
 
     // - cool s manuever + drive
     chass.arcTurn(45, 7.3, 450, -1, _arc, 20, 40);
-    chass.profiledDrive(-29.4, 0, 30, 60);
-    chass.arcTurn(1, 7.3, 470, -1, _arc, 20, 10);
+    chass.profiledDrive(-29.8, 0, 30, 60);
+    chass.arcTurn(3, 7.3, 460, -1, _arc, 20, 10);
     robot::intake.spin(-127);
     // chass.profiledDrive(-46, 30);
     chass.profiledDrive(-79, 0, 40, 55);
@@ -483,7 +485,7 @@ void skills() {
 
 
     // - allign for push #1
-    chass.pidTurn(neg(3), 300, _45);
+    chass.pidTurn(neg(6), 300, _90);
     chass.profiledDrive(20, 0, 0, 35);
     chass.arcTurn(45, 6, 370, -1, _arc, 30);
     chass.profiledDrive(13, 0, 0, 0);
@@ -516,10 +518,10 @@ void skills() {
 
     // for (int i = 0; i < 3; i++) {
         // - new allign for push #2
-        chass.profiledDrive(23, 0, 0, 5);
+        chass.profiledDrive(25, 0, 0, 5);
         chass.arcTurn(89, 4.6, 400, -1, _arc, 20, 'c');
         chass.profiledDrive(20, 0, 20, 0);
-        chass.pidTurn(181, 460, _90);
+        chass.pidTurn(181, 510, _90);
         // robot::vwings.toggle();
         glb::vpis2.set_value(true);
         // - push #2
@@ -562,9 +564,9 @@ void skills() {
     // - get balls from corner
     // robot::wings.toggle();
     chass.pidTurn(88, 490, _90);
-    chass.profiledDrive(29, 0, 0, 0);
+    chass.profiledDrive(25, 0, 0, 0);
     chass.pidTurn(180, 530, _90);
-    chass.profiledDrive(12, 0, 0, 0);
+    chass.profiledDrive(10, 0, 0, 0);
     chass.pidTurn(neg(90), 470, _90);
 
     robot::vwings.toggle();
@@ -576,18 +578,19 @@ void skills() {
 
 
 
-    // chass.pidTurn(180, 380, _45);
-    chass.profiledDrive(-15, 0, 0, 0);
+    chass.pidTurn(183, 230, _45);
+    chass.profiledDrive(-10, 0, 0, 0);
 
-    // chass.pidTurn(5, 440, _45);
+    chass.pidTurn(0, 600, _180);
 
     // // - push #1
 
     // // - push
 
-    // robot::wings.toggle();
-    // chass.timedDrive(800, -127);
-    // robot::wings.toggle();
+    robot::wings.toggle();
+    chass.timedDrive(800, -127);
+    robot::wings.toggle();
+    chass.profiledDrive(5, 0, 0, 0);
 
     
     // robot::wings.toggle();
@@ -625,21 +628,24 @@ void skills() {
     // chass.timedDrive(800, -127);
     // robot::wings.toggle();
 
-    // chass.arcTurn(93, 4.5, 600, 1, _arc, 30, 10);
-    chass.pidTurn(93, 400, _90);
-    chass.profiledDrive(60, 0, 30, 10);
+    chass.arcTurn(92, 4.5, 600, -1, _arc, 5, 10);
+    robot::wings.toggle();
+    pros::delay(200);
+    robot::wings.toggle();
+    // chass.pidTurn(97, 400, _90);
+    chass.profiledDrive(58, 0, 30, 10);
     glb::wpis2.set_value(true);
     chass.pidTurn(180, 200, _90);
-    chass.pidTurn(neg(90), 200, _90);
+    chass.pidTurn(neg(90), 340, _90);
     glb::wpis2.set_value(false);
-    chass.pidTurn(0, 300, _90);
-    chass.arcTurn(86, 7.9, 700, 1, _arc);
-    chass.timedDrive(900, -127);
-    chass.pidTurn(90, 300, _90);
+    chass.pidTurn(3, 400, _90);
+    chass.arcTurn(86, 7.2, 700, 1, _arc);
+    chass.timedDrive(700, -127);
+    chass.pidTurn(90, 200, _90);
     chass.profiledDrive(17, 10);
     chass.pidTurn(60, 300, _45);
-    chass.timedDrive(1000, -127);
-    chass.timedDrive(1000, 127);
+    chass.timedDrive(700, -127);
+    chass.profiledDrive(17, 10);
 }
 void calcTrack() {
 	double dl = 0;
