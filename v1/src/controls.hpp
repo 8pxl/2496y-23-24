@@ -10,12 +10,15 @@ void driver() {
     robot::chassMtrs.spinDiffy(robot::controller.drive(1, lib::controller::arcade));
 
     if(state[L2]) {
-        if (state[R2]) robot::blocker.spin(50);
-        else if (state[R1]) robot::blocker.spin(-50);
+        if (state[R2]) robot::blocker.spin(-70);
+        else if (state[R1]) robot::blocker.spin(70);
         else robot::blocker.stop('h');
         if(state[L1]) {
             robot::vwings.setState(true);
-            robot::intake.spin(127);
+            robot::intake.spin(-127);
+        }
+        else {
+            robot::intake.stop('c');
         }
     }
     

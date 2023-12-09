@@ -35,6 +35,7 @@ namespace cata {
         double angle = rot.get_angle();
         double error = lib::minError(target/100.0, angle/100.0);
         std::cout << error << std::endl;
+        double vel;
         switch (state) {
             case firing:
                 inRange.reset();
@@ -50,9 +51,9 @@ namespace cata {
             case reloading:
                 // std::cout << "reloading" << std::endl;
                 // std::cout << inRange.time() << std::endl;
-                double vel = pid.out(error);
+                vel = pid.out(error);
                 if (vel < 0) {
-                    vel = 0;
+                    vel = -127;
                 }
                 robot::cata.spin(vel);
                 if(fabs(error) < 20) {
@@ -76,6 +77,7 @@ namespace cata {
             case toggeled: 
                 robot::cata.spin(-127);
                 break;
+                
             case delayed:
                 if (delay.time() < 300) robot::cata.stop('b');
                 else {

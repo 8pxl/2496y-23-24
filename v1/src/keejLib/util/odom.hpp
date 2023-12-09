@@ -56,6 +56,8 @@ void lib::chassis::updatePos()
 
 void lib::chassis::initTracking()
 {
+  vertTracker -> reset();
+  horizTracker -> reset();
   odomTask = new pros::Task {[=] 
   {
     while (true) 

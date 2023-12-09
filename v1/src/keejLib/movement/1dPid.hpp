@@ -17,9 +17,7 @@ lib::pid lib::chassis::pidTurn(double target, double timeout, lib::pidConstants 
   lib::pid pidController(constants, target);
   while(timer.time() < timeout)
   {
-    double temp = lib::minError(target, imu -> get_heading());
-    if(fmod(timer.time(), 100) == 0) std::cout << temp << std::endl;
-    double vel = pidController.out(temp);
+    double vel = pidController.out(lib::minError(target, imu -> get_heading()));
     chass -> spinDiffy(-vel, vel);
     pros::delay(10);
   }
