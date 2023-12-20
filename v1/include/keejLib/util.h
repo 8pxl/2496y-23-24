@@ -2,6 +2,7 @@
 
 #include <cmath>
 #include <vector>
+#include <set>
 #include "main.h"
 
 #define PI 3.14159265358979323846

@@ -17,12 +17,14 @@ bin/main.cpp.o: src/main.cpp include/main.h include/api.h \
  include/../include/keejLib/lib.h include/../include/keejLib/groups.h \
  include/../include/keejLib/chassis.h include/../include/keejLib/util.h \
  include/../include/keejLib/controller.h \
+ include/../include/keejLib/scheduler.h \
  src/keejLib/movement/1dMotionProfiling.hpp \
  src/keejLib/movement/1dPid.hpp src/keejLib/movement/2dPid.hpp \
  src/keejLib/movement/pursuit.hpp src/keejLib/chassis.hpp \
  src/keejLib/controller.hpp src/keejLib/groups.hpp \
  src/keejLib/util/odom.hpp src/keejLib/util/util.hpp \
- src/keejLib/util/paths.hpp src/controls.hpp src/cata.hpp src/autons.hpp
+ src/keejLib/util/paths.hpp src/keejLib/util/scheduler.hpp \
+ src/keejLib/util/aayush.h src/controls.hpp src/cata.hpp src/autons.hpp
 include/main.h:
 include/api.h:
 include/pros/adi.h:
@@ -75,6 +77,7 @@ include/../include/keejLib/groups.h:
 include/../include/keejLib/chassis.h:
 include/../include/keejLib/util.h:
 include/../include/keejLib/controller.h:
+include/../include/keejLib/scheduler.h:
 src/keejLib/movement/1dMotionProfiling.hpp:
 src/keejLib/movement/1dPid.hpp:
 src/keejLib/movement/2dPid.hpp:
@@ -85,6 +88,8 @@ src/keejLib/groups.hpp:
 src/keejLib/util/odom.hpp:
 src/keejLib/util/util.hpp:
 src/keejLib/util/paths.hpp:
+src/keejLib/util/scheduler.hpp:
+src/keejLib/util/aayush.h:
 src/controls.hpp:
 src/cata.hpp:
 src/autons.hpp:
