@@ -17,6 +17,7 @@ namespace glb {
     pros::ADIButton limit(-1);
     pros::Controller controller(pros::E_CONTROLLER_MASTER);
     pros::Rotation rot(19);
+    lib::scheduler async;
 }
 
 //https://www.desmos.com/calculator/zwl4noapxl

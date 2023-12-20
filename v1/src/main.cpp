@@ -8,6 +8,7 @@ void (*auton)();
 
 void initialize() {
 	glb::imu.reset();
+	glb::async.init();
 	auton = autons.autonsList[robot::controller.select(autons.names)];	
 }
 

@@ -1,9 +1,6 @@
 #pragma once
 #include "main.h"
-#include "aayush.h"
 #include "../include/keejLib/lib.h"
-using namespace lib;
-using namespace pros;
 namespace lib {
     
     void lib::scheduler::run() {

@@ -116,7 +116,10 @@ void test1() {
 
 
 void test2() {
+    glb::async.add([]{robot::intake.spin(127);}, 300);
+    glb::async.add([]{robot::intake.stop('c');}, 600);
     chass.profiledTurn(90,1);
+    chass.eulerTurn(183, 0.00335, 1000, -1, _eul);
     // chass.arcTurn()
     // chass.pidTurn(90, 4000, _90);
     // chass.pidTurn(45, 4000, _45);
