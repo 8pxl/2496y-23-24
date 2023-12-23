@@ -5,8 +5,8 @@ using namespace robot;
 
 
 namespace cata {
-    constexpr double halfPos = 17499;
-    constexpr double load = 17182;
+    constexpr double halfPos = 21717;
+    constexpr double load = 21717;
 
     enum cataState {
         firing,
@@ -20,7 +20,7 @@ namespace cata {
     
     cataState state = idle;
     lib::pid pid({
-        .p = 2.8,
+        .p = 2.2,
         .i = 0, 
         .d = 0, 
         .tolerance = 0.05, 
@@ -81,7 +81,7 @@ namespace cata {
                 break;
 
             case toggeled: 
-                robot::cata.spin(-127);
+                robot::cata.spin(-118);
                 break;
                 
             case off:
