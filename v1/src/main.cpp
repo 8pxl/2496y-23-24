@@ -9,6 +9,7 @@ void (*auton)();
 void initialize() {
 	glb::imu.reset();
 	glb::async.init();
+	init();
 	auton = autons.autonsList[robot::controller.select(autons.names)];	
 }
 
@@ -19,5 +20,7 @@ void opcontrol() {
 	while (true) {
 		driver();
 		if (glb::controller.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN)) auton();
+		if(auton == tank) robot::chassMtrs.spinDiffy(robot::controller.drive(1, lib::controller::tank));
+		else robot::chassMtrs.spinDiffy(robot::controller.drive(1, lib::controller::arcade));
 	}
 }

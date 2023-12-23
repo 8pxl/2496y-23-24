@@ -705,8 +705,15 @@ void sus_near() {
 //     {"test", "test2", "six_far", "safe_far", "track", "safe_near", "skills", "rush_far", "reach_far", "rush_near", "new_far", "new_near"}
 // };
 
+void init() {
+    async.add([]{robot::blocker.spin(-30);}, 0);
+    async.add([]{robot::blocker.spin(0);}, 300);
+    async.add([]{robot::blocker.reset();}, 300);
+}
+
+void tank() {}
 
 lib::atns autons = {
-    {skills, new_far, new_near, sus_near}, 
-    {"skills", "new_far", "new_near", "sus_near"}
+    {skills, new_far, new_near, sus_near, tank}, 
+    {"skills", "new_far", "new_near", "sus_near", "tank"}
 };
