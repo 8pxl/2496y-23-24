@@ -11,25 +11,27 @@ namespace glb {
     pros::Imu imu(13);
     pros::ADIDigitalOut wpis1('B');
     pros::ADIDigitalOut wpis2('H');
-    pros::ADIDigitalOut spis('C');
-    pros::ADIDigitalOut vpis1('E');
+    pros::ADIDigitalOut spis('A');
+    pros::ADIDigitalOut vpis1('D');
     pros::ADIDigitalOut vpis2('F');
+    pros::ADIDigitalOut pto('C');
     pros::ADIButton limit(-1);
     pros::Controller controller(pros::E_CONTROLLER_MASTER);
-    pros::Rotation rot(19);
+    pros::Rotation rot(3);
     lib::scheduler async;
 }
 
 //https://www.desmos.com/calculator/zwl4noapxl
 //math for robot constants
 namespace robot {
-    lib::diffy chassMtrs({-2, -3, -1, 9, 6, 10});
-    lib::mtrs intake({5});
-    lib::mtrs blocker({-20});
-    lib::mtrs cata({-8});
+    lib::diffy chassMtrs({-12, -17, -8, 16, 14, 5});
+    lib::mtrs intake({9});
+    lib::mtrs blocker({-10});
+    lib::mtrs cata({-1});
     lib::pis scraper({glb::spis}, false);
     lib::pis wings({glb::wpis1, glb::wpis2}, false);
     lib::pis vwings({glb::vpis1, glb::vpis2}, false);
+    lib::pis pto({glb::pto}, false);
     lib::controller controller(glb::controller);
     lib::chassis chass (
         chassMtrs, 
