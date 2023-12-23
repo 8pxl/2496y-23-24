@@ -6,7 +6,7 @@ namespace lib {
         private: 
             struct task {
                 fptr task;
-                int start;
+                uint32_t start;
             };
 
             struct cmp {
@@ -15,13 +15,11 @@ namespace lib {
                 };
             };
             pros::Task* mainTask = nullptr;
-            // bool cmp = [](const task &a, const task &b) {return a.start < b.start;};
             std::multiset<task, cmp> tasks; 
-            //create a new function 
         public:
             scheduler(){};
             void run();
-            void add(fptr task, int start);
+            void add(fptr task, uint32_t start);
             void init();
     };
 }
