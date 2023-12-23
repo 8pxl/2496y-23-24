@@ -1,18 +1,23 @@
 #include "main.h"
 #include "robot.hpp"
 #include "cata.hpp"
-// #include "util.hpp"
 
 using namespace lib;
 
+bool bRunning = true;
+char bHold = 'c';
 void driver() {
     std::vector<bool> state = robot::controller.getAll(ALLBUTTONS);
-    robot::chassMtrs.spinDiffy(robot::controller.drive(1, lib::controller::arcade));
+    // robot::chassMtrs.spinDiffy(robot::controller.drive(1, lib::controller::arcade));
 
     if(state[L2]) {
+        bRunning = true;
         if (state[R2]) robot::blocker.spin(-127);
         else if (state[R1]) robot::blocker.spin(127);
-        else robot::blocker.stop('h');
+        else {
+            bRunning = false;
+            bHold = 'h';
+        }
         if(state[L1]) {
             robot::vwings.setState(true);
             robot::intake.spin(-127);
@@ -33,13 +38,20 @@ void driver() {
         else if (state[R2]) robot::intake.spin(-127);
         else if(!state[L1]) robot::intake.stop('c');
 
-        if (state[X]) robot::blocker.stop('c');
+        if (state[X]) {
+            bHold = 'c';
+        }
 
         if (state[NLEFT]) scraper.toggle();
         if (state[UP]) robot::cata.spin(-127); 
-        else if (cata::state == cata::cataState::idle) {
-            robot::cata.spin(0);
-        }
+        else if (cata::state == cata::cataState::idle) robot::cata.spin(0);
+
+        if(state[NY]) robot::pto.toggle();
+        if(robot::pto.getState()) bHold = 'c';
+        if(!state[R2] && !state[R1]) bRunning = false;
+    }
+    if (!bRunning) {
+        robot::blocker.stop(bHold);
     }
     
     if(!state[L1]) robot::wings.setState(false);
