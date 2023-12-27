@@ -10,6 +10,7 @@ void initialize() {
 	glb::imu.reset();
 	// glb::async.init();
 	// init();
+	cata::init();
 	auton = autons.autonsList[robot::controller.select(autons.names)];	
 }
 

@@ -7,6 +7,7 @@ using namespace robot;
 namespace cata {
     constexpr double halfPos = 21717;
     constexpr double load = 21717;
+    pros::Task* cataTask = nullptr;
 
     enum cataState {
         firing,
@@ -81,7 +82,7 @@ namespace cata {
                 break;
 
             case toggeled: 
-                robot::cata.spin(-103);
+                robot::cata.spin(-117);
                 break;
                 
             case off:
@@ -118,5 +119,14 @@ namespace cata {
         else {
             state = off;
         }
+    }
+
+    void init() {
+        cataTask = new pros::Task{[=]{
+            while(true) {
+                cataControl();
+                pros::delay(20);
+            }
+        }};
     }
 }

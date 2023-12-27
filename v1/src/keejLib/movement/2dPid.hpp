@@ -21,16 +21,16 @@ void lib::chassis::driveAngle(double target, double heading, double timeout, lib
     {
       angularError = 0;
     }
-
     double va = angularController.out(angularError);
     double vl = linearController.out(target - chass -> getRotation());
+    std::cout << chass -> getRotation() << std::endl;
 
-    if (vl + std::abs(va) > 127)
+    if (std::abs(vl) + std::abs(va) > 127)
     {
-      vl = 127 - std::abs(va);
+      vl = (127 - std::abs(va)) * sign(vl);
     }
 
-    chass -> spinDiffy(vl - (va * sgn),  vl + (va * sgn));
+    chass -> spinDiffy(vl - va, vl + va);
     pros::delay(10);
   }
   chass -> stop('b');

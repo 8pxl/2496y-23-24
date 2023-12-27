@@ -46,7 +46,7 @@ void driver() {
         }
 
         if (state[NLEFT]) scraper.toggle();
-        if (state[UP]) robot::cata.spin(-127); 
+        // if (state[UP]) robot::cata.spin(-127); 
         else if (cata::state == cata::cataState::idle) robot::cata.spin(0);
 
         if(state[NY]) robot::pto.toggle();
@@ -62,6 +62,6 @@ void driver() {
     if(!state[L1]) robot::wings.setState(false);
     if(!state[L1]) robot::vwings.setState(false);
 
-    cata::cataControl();
+    // cata::cataControl();
     pros::delay(20);
 }
