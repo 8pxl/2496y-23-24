@@ -53,13 +53,14 @@ void driver() {
         if(robot::pto.getState()) bHold = 'c';
         if(!state[R2] && !state[R1]) bRunning = false;
     }
+
     if (state[R2] != r2 && r2) bHold = 'c';
     r2 = state[R2];
     if (!bRunning) {
         robot::blocker.stop(bHold);
     }
-    
-    if(!state[L1]) robot::wings.setState(false);
+    if (cata::state == cata::toggeled) robot::wings.setState(true);
+    else if(!state[L1]) robot::wings.setState(false);
     if(!state[L1]) robot::vwings.setState(false);
 
     // cata::cataControl();

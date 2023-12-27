@@ -5,8 +5,8 @@ using namespace robot;
 
 
 namespace cata {
-    constexpr double halfPos = 21717;
-    constexpr double load = 21717;
+    constexpr double halfPos = 25681;
+    constexpr double load = 25681;
     pros::Task* cataTask = nullptr;
 
     enum cataState {
@@ -21,7 +21,7 @@ namespace cata {
     
     cataState state = idle;
     lib::pid pid({
-        .p = 2.8,
+        .p = 2.4,
         .i = 0.4, 
         .d = 0, 
         .tolerance = 0.05, 
