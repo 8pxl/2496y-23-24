@@ -20,8 +20,8 @@ namespace cata {
     
     cataState state = idle;
     lib::pid pid({
-        .p = 2.2,
-        .i = 0, 
+        .p = 2.8,
+        .i = 0.4, 
         .d = 0, 
         .tolerance = 0.05, 
         .integralThreshold = 15, 
@@ -81,7 +81,7 @@ namespace cata {
                 break;
 
             case toggeled: 
-                robot::cata.spin(-118);
+                robot::cata.spin(-103);
                 break;
                 
             case off:

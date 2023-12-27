@@ -5,14 +5,17 @@
 using namespace lib;
 
 bool bRunning = true;
-char bHold = 'c';
+char bHold = 'b';
+bool r2 = false;
 void driver() {
     std::vector<bool> state = robot::controller.getAll(ALLBUTTONS);
     // robot::chassMtrs.spinDiffy(robot::controller.drive(1, lib::controller::arcade));
 
     if(state[L2]) {
         bRunning = true;
-        if (state[R2]) robot::blocker.spin(-127);
+        if (state[R2]) {
+            robot::blocker.spin(-127);
+        }
         else if (state[R1]) robot::blocker.spin(127);
         else {
             bRunning = false;
@@ -50,6 +53,8 @@ void driver() {
         if(robot::pto.getState()) bHold = 'c';
         if(!state[R2] && !state[R1]) bRunning = false;
     }
+    if (state[R2] != r2 && r2) bHold = 'c';
+    r2 = state[R2];
     if (!bRunning) {
         robot::blocker.stop(bHold);
     }

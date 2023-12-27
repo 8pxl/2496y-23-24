@@ -8,7 +8,7 @@
 
 namespace glb {
     //pros
-    pros::Imu imu(13);
+    pros::Imu imu(2);
     pros::ADIDigitalOut wpis1('B');
     pros::ADIDigitalOut wpis2('H');
     pros::ADIDigitalOut spis('A');
