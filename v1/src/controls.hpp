@@ -63,6 +63,8 @@ void driver() {
     else if(!state[L1]) robot::wings.setState(false);
     if(!state[L1]) robot::vwings.setState(false);
 
+    if(state[NRIGHT]) glb::imu.reset();
+
     // cata::cataControl();
     pros::delay(20);
 }
