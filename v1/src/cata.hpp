@@ -32,7 +32,7 @@ namespace cata {
     lib::timer inRange; 
     double target = load;
 
-    void cataControl() {
+    void cataControl() {    
         // std::cout << limit.get_value() << std::endl;
         double angle = rot.get_angle();
         double error = lib::minError(target/100.0, angle/100.0);
@@ -82,7 +82,7 @@ namespace cata {
                 break;
 
             case toggeled: 
-                robot::cata.spin(-109);
+                robot::cata.spin(-111);
                 break;
                 
             case off:
