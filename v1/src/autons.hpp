@@ -878,7 +878,7 @@ void skills() {
     // robot::scraper.toggle();
     // robot::blocker.spin(-50);
     // chass.pidTurn(neg(22.6), 900, _15);
-    chass.pidTurn(161, 700, _15);
+    chass.pidTurn(159.4, 700, _15);
     // robot::scraper.toggle();
     // robot::blocker.spin(0);
     chass.profiledDrive(-2, 0);
@@ -888,10 +888,10 @@ void skills() {
     glb::wpis1.set_value(true);
     while (t1.time() < 24000) {
         if(t1.time() >= 20000 && t1.time() < 24000) {
-            chass.pidTurn(167, 300, _15);
+            chass.pidTurn(161, 300, _15);
         }
         else {
-            chass.pidTurn(161, 300, _15);
+            chass.pidTurn(159.4, 300, _15);
         }
         pros::delay(20);
         // robot::cata.spin(-104);
