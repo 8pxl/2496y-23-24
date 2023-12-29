@@ -36,6 +36,7 @@ void driver() {
         if (state[L1]) robot::wings.setState(true);
         if (state[NB]) cata::cut();
         if (state[NA]) cata::toggle();
+        if (state[NUP]) cata::fire();
 
         if (state[R1]) robot::intake.spin(127);
         else if (state[R2]) robot::intake.spin(-127);

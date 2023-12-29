@@ -40,14 +40,10 @@ namespace cata {
         double vel;
         switch (state) {
             case firing:
-                inRange.reset();
-                if (limit.get_value()) {
-                    robot::cata.spin(-127);
+                if (inRange.time() > 375) {
+                    state = off;
                 }
-                else {
-                    delay.reset();
-                    state = delayed;
-                }
+                robot::cata.spin(-127);
                 break;
 
             case reloading:
@@ -82,7 +78,7 @@ namespace cata {
                 break;
 
             case toggeled: 
-                robot::cata.spin(-105);
+                robot::cata.spin(-101);
                 break;
                 
             case off:
