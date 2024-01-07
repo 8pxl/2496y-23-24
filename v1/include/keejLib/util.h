@@ -3,6 +3,8 @@
 #include <cmath>
 #include <vector>
 #include <set>
+#include <queue>
+#include <numeric>
 #include "main.h"
 
 #define PI 3.14159265358979323846
@@ -79,14 +81,14 @@ namespace lib
     class sma
     {
         private:
-            uint8_t arrSize;
-            double arr[arrSize];
+            uint8_t qSize;
+            std::queue<double> q;
+            double sum;
         public:
             sma();
             sma(uint8_t size);
 
             void push(double val);
-            double update(double val);
             double out();
     };
 
@@ -110,10 +112,10 @@ namespace lib
     class fpa
     {
         private:
-            uint8_t arrSize;
+            uint8_t size;
             double prev;
             fpaConstants constants;
-            sma average;
+            lib::sma sma;
         
         public:
             fpa();

@@ -64,7 +64,10 @@
         "algorithm": "cpp",
         "map": "cpp",
         "valarray": "cpp",
-        "typeindex": "cpp"
+        "typeindex": "cpp",
+        "queue": "cpp",
+        "deque": "cpp",
+        "numeric": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

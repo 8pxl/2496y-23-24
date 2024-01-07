@@ -55,6 +55,34 @@ int lib::timer::time()
     return (pros::millis() - startTime);
 }
 
+// - sma
+
+lib::sma::sma()
+{
+    sma(5);
+}
+
+lib::sma::sma(uint8_t size) 
+{
+    qSize = size;
+}
+
+void lib::sma::push(double val)
+{
+    q.push(val);
+    sum += val;
+    if (q.size() > qSize) 
+    {
+        sum -= q.front();
+        q.pop();
+    }
+}
+
+double lib::sma::out()
+{   
+    return sum / q.size();
+}
+
 // - pid
 double lib::pid::out(double error)
 {
@@ -80,6 +108,10 @@ void lib::pid::setConstants(pidConstants cons)
 {
     constants = cons;
 }
+
+// - fpa
+
+
 // - util functions
 double lib::dtr(double input)
 {
