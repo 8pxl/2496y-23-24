@@ -41,7 +41,7 @@ namespace lib
     enum odomType {twoIME, threeEncoder};
 
     struct pidConstants{double p,i,d,tolerance,integralThreshold, maxIntegral;};
-
+    struct fpaConstants{double f, p, a;};
     struct robotConstants{double horizTrack, vertTrack, trackDia;};
     struct accelConstants{double maxSpeed, fwdAccel, fwdDecel, revAccel, revDecel, velToVolt;};
     //distance per 10 ms to motor volt
@@ -76,6 +76,20 @@ namespace lib
             int time();
     };
 
+    class sma
+    {
+        private:
+            uint8_t arrSize;
+            double arr[arrSize];
+        public:
+            sma();
+            sma(uint8_t size);
+
+            void push(double val);
+            double update(double val);
+            double out();
+    };
+
     class pid
     {
         private:
@@ -85,11 +99,30 @@ namespace lib
 
         public:
             pid(){}
-
             pid(pidConstants cons, double error) : constants(cons), prevError(error){}
 
             double out(double error);
             double getDerivative();
+            void reset();
+            void setConstants(pidConstants cons);
+    };
+
+    class fpa
+    {
+        private:
+            uint8_t arrSize;
+            double prev;
+            fpaConstants constants;
+            sma average;
+        
+        public:
+            fpa();
+            fpa(fpaConstants cons, uint8_t size);
+            
+            double out(double target, double curr);
+            void reset();
+            void setConstants();
+
     };
 
     class cubicBezier 

@@ -14,6 +14,8 @@ namespace lib
             lib::robotConstants constants;
             lib::accelConstants linear;
             lib::accelConstants angular;
+            lib::pid linPid;
+            lib::pid angPid;
             pros::Task* odomTask = nullptr;
             double prevRotation = 0;
 

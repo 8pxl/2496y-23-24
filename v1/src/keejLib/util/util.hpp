@@ -71,6 +71,15 @@ double lib::pid::getDerivative()
     return derivative;
 }
 
+void lib::pid::reset()
+{
+    prevError, error, derivative, integral = 0;
+}
+
+void lib::pid::setConstants(pidConstants cons)
+{
+    constants = cons;
+}
 // - util functions
 double lib::dtr(double input)
 {
