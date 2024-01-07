@@ -111,6 +111,29 @@ void lib::pid::setConstants(pidConstants cons)
 
 // - fpa
 
+lib::fpa::fpa(uint8_t sz) 
+{
+    size = sz;
+    reset();
+}
+
+double lib::fpa::out(double target, double curr)
+{
+    double out = constants.f * target + constants.p * (target - curr) + constants.a * (target - prev);
+    prev = target;
+    return out;
+}
+
+void lib::fpa::reset()
+{
+    prev = 0;
+    sma = lib::sma(size);
+}
+
+void lib::fpa::setConstants(fpaConstants cons) 
+{
+    constants = cons;
+}
 
 // - util functions
 double lib::dtr(double input)

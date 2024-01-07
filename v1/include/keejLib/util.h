@@ -118,13 +118,11 @@ namespace lib
             lib::sma sma;
         
         public:
-            fpa();
-            fpa(fpaConstants cons, uint8_t size);
+            fpa(uint8_t sz);
             
             double out(double target, double curr);
             void reset();
-            void setConstants();
-
+            void setConstants(fpaConstants cons);
     };
 
     class cubicBezier 
