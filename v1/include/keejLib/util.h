@@ -46,9 +46,11 @@ namespace lib
     struct fpaConstants{double f, p, a;};
     struct robotConstants{double horizTrack, vertTrack, trackDia;};
     struct accelConstants{double maxSpeed, fwdAccel, fwdDecel, revAccel, revDecel, velToVolt;};
+    struct exit{double tolerance, timeout;};
     //distance per 10 ms to motor volt
     struct atns{std::vector<fptr> autonsList; std::vector<std::string> names; };
 
+    
     class point
     {
         public:

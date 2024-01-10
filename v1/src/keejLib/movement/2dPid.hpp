@@ -17,10 +17,7 @@ void lib::chassis::driveAngle(double target, double heading, double timeout, lib
     currHeading = imu -> get_heading();
     double angularError = lib::minError(heading, currHeading);
 
-    if (std::abs(angularError) < acons.tolerance)
-    {
-      angularError = 0;
-    }
+    if (std::abs(angularError) < acons.tolerance) angularError = 0;
     double va = angularController.out(angularError);
     double vl = linearController.out(target - chass -> getRotation());
     std::cout << chass -> getRotation() << std::endl;

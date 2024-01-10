@@ -10,13 +10,18 @@ namespace lib
             pros::Imu* imu;
             pros::ADIEncoder* horizTracker = nullptr;
             pros::ADIEncoder* vertTracker = nullptr;
-            point pos = {0,0};
+            lib::point pos = {0,0};
             lib::robotConstants constants;
             lib::accelConstants linear;
             lib::accelConstants angular;
             lib::pid linPid;
             lib::pid angPid;
+            lib::fpa lFpa;
+            lib::fpa rFpa;
+            lib::fpaConstants vel;
             pros::Task* odomTask = nullptr;
+            std::multiset<std::pair<int, pidConstants>> turnConstants;
+            std::vector<pidConstants> constants;
             double prevRotation = 0;
 
         public:
@@ -29,15 +34,13 @@ namespace lib
             void initTracking();
 
             //1dpid
-            lib::pid pidDrive(double target, double timeout, lib::pidConstants constants, char brake);
-            lib::pid pidTurn(double target, double timeout, lib::pidConstants constants, char brake);
-            lib::pid pidDrive(double target, double timeout, char brake, lib::pid cont);
-            lib::pid pidTurn(double target, double timeout, char brake, lib::pid cont);
+            void pidDrive(double target, double timeout, exit conditions, bool async);
+            void pidTurn(double target, double timeout, exit conditions, bool async);
             // lib::pid keejTurn(double target, int timeout, lib::pidConstants constants, char brake);
 
 
-            void arcTurn(double target, double radius, double timeout, int dir, lib::pidConstants constants, double min, int endTime, char brake); 
-            void eulerTurn(double theta, double rate, double timeout, int dir, lib::pidConstants constants);
+            void arcTurn(double target, double radius, double timeout, int dir, double min, int endTime, exit conditions, bool async); 
+            void eulerTurn(double theta, double rate, double timeout, int dir, exit conditions, bool async);
 
             //1dmp
             std::vector<double> asymTrapezoidalProfile(double dist, double maxSpeed, double accel, double decel, double start, double end);
@@ -47,7 +50,7 @@ namespace lib
 
 
             //2dpid
-            void driveAngle(double target, double heading, double timeout, lib::pidConstants lCons, lib::pidConstants acons);
+            void driveAngle(double target, double heading, double timeout, exit conditions, bool async);
             std::vector<double> pidMTPVel(const point& target, double rotationBias, lib::pid* lCont, lib::pid* rCont);
             void pidMoveTo(const point& target, double timeout, lib::pidConstants lConstants, lib::pidConstants 
             rConstants, double rotationBias);
