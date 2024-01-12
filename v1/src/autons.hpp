@@ -668,14 +668,14 @@ void rush_far() {
     robot::vwings.toggle();
     chass.driveAngle(-600, 150, 300, _lin, _ang);
     // chass.arcTurn(neg(50), 6.5, 500, -1, _arc, 10);
-    chass.pidTurn(neg(30), 700, _90);
-    chass.driveAngle(1300, neg(30), 900, _lin, _ang);
+    chass.pidTurn(neg(30), 600, _90);
+    chass.driveAngle(1300, neg(30), 700, _lin, _ang);
     chass.pidTurn(neg(140), 700, _90);
-    chass.driveAngle(2700, neg(140), 1000, _lin, _ang);
+    chass.driveAngle(2700, neg(140), 900, _lin, _ang);
     // chass.arcTurn(50, 8, 900, -1, _arc, 10);
     // chass.driveAngle(1200, neg(), 500, _lin, _ang);
 
-chass.pidTurn(135, 600, _90);
+chass.pidTurn(135, 500, _90);
     // glb::vpis2.set_value(true);
     // robot::vwings.toggle();
 // chass.driveAngle(-1000, 160, 500, _lin, _ang);
@@ -687,7 +687,7 @@ chass.pidTurn(135, 600, _90);
     chass.pidTurn(145, 400, _135);
     robot::vwings.toggle();
     robot::intake.spin(-127);
-    chass.arcTurn(90, 11.8, 750, 1, _arc, 0);
+    chass.arcTurn(90, 8, 750, 1, _arc, 0);
     // robot::vwings.toggle();
     chass.timedDrive(400, 100);
     pros::delay(40);
@@ -695,8 +695,8 @@ chass.pidTurn(135, 600, _90);
     // robot::vwings.toggle();
     pros::delay(140);
     chass.timedDrive(400, 100);
-    chass.driveAngle(-700, 120, 300, _lin, _angBig);
-    chass.driveAngle(-700, 160, 300, _lin, _angBig);
+    chass.driveAngle(-1200, 120, 300, _lin, _angBig);
+    chass.driveAngle(-1200, 160, 300, _lin, _angBig);
     chass.driveAngle(-600, 225, 300, _lin, _angBig);
     chass.driveAngle(-700, neg(90), 300, _lin, _angBig);
 }
@@ -965,16 +965,16 @@ void skills() {
     // glb::vpis1.set_value(true);
     cata::toggle();
     glb::wpis1.set_value(true);
-    // while (t1.time() < 24000) {
-    //     if(t1.time() >= 20000 && t1.time() < 24000) {
-    //         chass.pidTurn(159.8, 300, _15);
-    //     }
-    //     else {
-    //         chass.pidTurn(159.8, 300, _15);
-    //     }
-    //     pros::delay(20);
-    //     // robot::cata.spin(-104);
-    // }
+    while (t1.time() < 30000) {
+        if(t1.time() >= 27 && t1.time() < 30000) {
+            chass.pidTurn(159.8, 300, _15);
+        }
+        else {
+            chass.pidTurn(159.8, 300, _15);
+        }
+        pros::delay(20);
+        // robot::cata.spin(-104);
+    }
     cata::toggle();
     // glb::vpis1.set_value(false);
     glb::wpis1.set_value(false);
@@ -1418,16 +1418,31 @@ void new_skills() {
     cata::fire();
 
     // - first side push
+    robot::intake.spin(127);
     chass.arcTurn(neg(24), 9, 400, -1, _arc, 40);
-    chass.driveAngle(-1200, neg(24), 410, _lin, _ang);
+    chass.driveAngle(-1240, neg(24), 410, _lin, _ang);
     chass.arcTurn(neg(87), 7.1, 480, -1, _arc);
     chass.timedDrive(500, -127);
-    chass.driveAngle(900, neg(70), 600, _lin, _angBig);
 
-    glb::wpis1.set_value(false);
+    chass.driveAngle(400, neg(41), 300, _lin, _angBig);
+    chass.driveAngle(1900, neg(41), 600, _lin, _ang);
+    
+    chass.pidTurn(6, 500, _90);
+    glb::wpis1.set_value(true);
+    
+    // glb::wpis1.set_value(false);
+    chass.arcTurn(neg(20), 9, 380, -1, _arc, 40);
+
+    chass.driveAngle(-900, neg(15), 410, _lin, _ang);
+    chass.arcTurn(neg(89), 6, 480, -1, _arc);
+
+    // chass.driveAngle(900, neg(70), 600, _lin, _angBig);
+
     chass.timedDrive(550, -127);
-    chass.driveAngle(130, neg(90), 150, _lin, _angBig);
-    chass.pidTurn(neg(87), 300, _90);
+    glb::wpis1.set_value(false);
+
+    // chass.driveAngle(130, neg(90), 150, _lin, _angBig);
+    // chass.pidTurn(neg(87), 300, _90);
     // chass.driveAngle(500, neg(90), 500, _lin, _ang);
 
 
@@ -1441,12 +1456,21 @@ void new_skills() {
 
     
     robot::intake.spin(127);
-    chass.arcTurn(3, 5.6, 480, -1, _arc, 5);
-    chass.driveAngle(1700, 3, 700, _lin, _ang);
+    chass.arcTurn(3, 5, 480, -1, _arc, 5);
+    chass.driveAngle(1460, 3, 600, _lin, _ang);
     // chass.arcTurn(173, 5.3, 800, -1, _arc, 5);
-    chass.arcTurn(45, 5.3, 600, -1, _arc, 5);
-    chass.driveAngle(900, 45, 400, _lin, _ang);
+    // chass.arcTurn(45, 5.3, 600, -1, _arc, 5);
+    chass.pidTurn(neg(90), 360, _90);
+    robot::wings.toggle();
+    chass.driveAngle(-700, neg(90), 400, _lin, _ang);
+    chass.driveAngle(500, neg(90), 400, _lin, _ang);
+    robot::wings.toggle();
+    // pros::delay(200);//
+    chass.pidTurn(25, 600, _90);
+    chass.driveAngle(700, 25, 400, _lin, _ang);
+    chass.driveAngle(700, 40, 700, _lin, _ang);
     chass.pidTurn(163, 410, _90);
+    // chass.driveAngle(700, 163, 250, _lin, _ang);
     robot::intake.spin(-127);
     robot::vwings.toggle();
     chass.driveAngle(1500, 163, 300, _lin, _ang);
@@ -1456,7 +1480,7 @@ void new_skills() {
 // - allign for push #1
     chass.driveAngle(-300, 177, 300, _lin, _angBig);
     robot::intake.spin(127);
-    chass.driveAngle(-1250, 177, 510, _lin, _angBig);
+    chass.driveAngle(-850, 177, 480, _lin, _angBig);
     chass.arcTurn(225, 5.7, 370, 1, _arc, 30);
     chass.driveAngle(-800, neg(120), 450, _lin, _angBig);
     chass.pidTurn(181.7, 580, _90);
@@ -1491,9 +1515,9 @@ void new_skills() {
         chass.driveAngle(-300, 170, 300, _lin, _angBig);
         robot::intake.spin(127);
         chass.driveAngle(-1240, 170, 450, _lin, _ang);
-        chass.arcTurn(neg(91), 4.6, 390, 1, _arc, 20, 10);
-        chass.driveAngle(-1100, neg(95), 610, _lin, _ang);
-        chass.driveAngle(390, neg(90), 300, _lin, _ang);
+        chass.arcTurn(neg(93), 4.6, 390, 1, _arc, 20, 10);
+        chass.driveAngle(-1100, neg(93), 610, _lin, _ang);
+        chass.driveAngle(390, neg(93), 300, _lin, _ang);
         chass.pidTurn(180, 480, _90);
         robot::intake.spin(-127);
         // chass.timedDrive(400, -30);
@@ -1546,7 +1570,7 @@ void new_skills() {
     // chass.profiledDrive(-27, 0, 0, 0);
     chass.driveAngle(-300, 180, 300, _lin, _angBig);
     chass.driveAngle(-900, 180, 460, _lin, _ang);
-    chass.arcTurn(neg(97), 5.6, 400, 1, _arc, 20);
+    chass.arcTurn(neg(97), 5.9, 400, 1, _arc, 20);
     // chass.driveAngle(-1460, neg(97), 700, _lin, _ang);
     chass.driveAngle(-1930, neg(97), 700, _lin, _ang);
     // glb::wpis2.set_value(true);
