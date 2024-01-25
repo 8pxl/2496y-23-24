@@ -1,7 +1,7 @@
 #include "main.h"
 #include "robot.hpp"
 #include "controls.hpp"
-#include "autons.hpp"
+#include "autons/autons.hpp"
 #include "keejLib/lib.hpp"
 
 void (*auton)();
