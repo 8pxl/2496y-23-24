@@ -78,7 +78,7 @@ namespace cata {
                 break;
 
             case toggeled: 
-                robot::cata.spin(-110);
+                robot::cata.spin(-107);
                 break;
                 
             case off:
