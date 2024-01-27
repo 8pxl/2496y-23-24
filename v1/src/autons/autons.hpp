@@ -243,7 +243,7 @@ void test1() {
 
 
 void test2() {
-
+    far_half();
 }
 
 void rush_near() {

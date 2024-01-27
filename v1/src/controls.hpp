@@ -60,8 +60,14 @@ void driver() {
     if (!bRunning) {
         robot::blocker.stop(bHold);
     }
-    if (cata::state == cata::toggeled) robot::wings.setState(true);
-    else if(!state[L1]) robot::wings.setState(false);
+    if (cata::state == cata::toggeled) {
+        robot::wings.setState(true);
+        robot::chassMtrs.setBrake('b');
+    }
+    else if(!state[L1]) {
+        robot::chassMtrs.setBrake('c');
+        robot::wings.setState(false);
+    }
     if(!state[L1]) robot::vwings.setState(false);
 
     if(state[NRIGHT]) glb::imu.reset();
