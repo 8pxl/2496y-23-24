@@ -24,8 +24,8 @@ bin/main.cpp.o: src/main.cpp include/main.h include/api.h \
  src/keejLib/controller.hpp src/keejLib/groups.hpp \
  src/keejLib/util/odom.hpp src/keejLib/util/util.hpp \
  src/keejLib/util/paths.hpp src/keejLib/util/scheduler.hpp \
- src/controls.hpp src/cata.hpp src/autons/autons.hpp \
- src/autons/constants.hpp src/autons/skills.hpp
+ src/controls.hpp src/cata.hpp src/autons/constants.hpp \
+ src/autons/autons.hpp src/autons/skills.hpp
 include/main.h:
 include/api.h:
 include/pros/adi.h:
@@ -92,6 +92,6 @@ src/keejLib/util/paths.hpp:
 src/keejLib/util/scheduler.hpp:
 src/controls.hpp:
 src/cata.hpp:
-src/autons/autons.hpp:
 src/autons/constants.hpp:
+src/autons/autons.hpp:
 src/autons/skills.hpp:

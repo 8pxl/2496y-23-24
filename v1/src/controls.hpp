@@ -1,6 +1,7 @@
 #include "main.h"
 #include "robot.hpp"
 #include "cata.hpp"
+#include "autons/constants.hpp"
 
 using namespace lib;
 
@@ -45,8 +46,6 @@ void driver() {
         if (state[X]) {
             bHold = 'c';
         }
-
-        if (state[NLEFT]) scraper.toggle();
         // if (state[UP]) robot::cata.spin(-127); 
         else if (cata::state == cata::cataState::idle) robot::cata.spin(0);
 
@@ -71,7 +70,19 @@ void driver() {
     if(!state[L1]) robot::vwings.setState(false);
 
     if(state[NRIGHT]) glb::imu.reset();
-
+    
+    if (state[NLEFT]) {
+        chass.profiledDrive(6, 0,0,0);
+        robot::chassMtrs.stop('b');
+        pros::delay(200);
+        // // robot::scraper.toggle();
+        // // robot::blocker.spin(-50);
+        // // chass.pidTurn(neg(22.6), 900, _15);
+        chass.pidTurn(neg(152.1), 800, _90);
+        // // robot::scraper.toggle();
+        // // robot::blocker.spin(0);
+        // chass.profiledDrive(-3.7, 0);
+    }
     // cata::cataControl();
     pros::delay(20);
 }
