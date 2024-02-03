@@ -13,7 +13,7 @@
             "-isystem/opt/homebrew/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/include",
             "-iquote./include",
             "-iquote./include/okapi/squiggles",
-            "-iquote./include/lib/",
+            "-iquote./include/./",
             "-mcpu=cortex-a9",
             "-mfpu=neon-fp16",
             "-mfloat-abi=softfp",
@@ -30,10 +30,10 @@
             "-funwind-tables",
             "--std=gnu++17",
             "-o",
-            "bin/lib/lib.cpp.o",
-            "src/lib/lib.cpp"
+            "bin/main.cpp.o",
+            "src/main.cpp"
         ],
-        "directory": "/Users/keijayhuang/Desktop/robotics/keejLib",
-        "file": "src/lib/lib.cpp"
+        "directory": "/Users/keijayhuang/Desktop/robotics/2496y-23-24/v1",
+        "file": "src/main.cpp"
     }
 ]

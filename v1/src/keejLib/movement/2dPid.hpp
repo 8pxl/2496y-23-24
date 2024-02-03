@@ -48,7 +48,7 @@ std::vector<double> lib::chassis::pidMTPVel(const lib::point& target, double rot
     double rVel = (linearVel - (fabs(angularVel) * rotationBias)) + angularVel;
     double lVel = (linearVel - (fabs(angularVel) * rotationBias)) - angularVel;
     return(std::vector<double> {rVel, lVel});
-} 
+}
 
 void lib::chassis::pidMoveTo(const lib::point& target, double timeout, lib::pidConstants lConstants, lib::pidConstants rConstants, double rotationBias)
 {

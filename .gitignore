@@ -19,3 +19,6 @@
 
 alliance/
 new/
+
+/v1/.cache
+/v1/bin

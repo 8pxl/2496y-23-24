@@ -4,68 +4,68 @@ using namespace robot;
 #define neg(a) 360-a
 
 pidConstants _180 {
-    .p = 5.9, 
-    .i = 0.6, 
-    .d = 70, 
-    .tolerance = 0.05, 
-    .integralThreshold = 1.1, 
+    .p = 5.9,
+    .i = 0.6,
+    .d = 70,
+    .tolerance = 0.05,
+    .integralThreshold = 1.1,
     .maxIntegral = 20
-}; 
+};
 
 pidConstants _135 {
-    .p = 6.3, 
-    .i = 0.43, 
-    .d = 59, 
-    .tolerance = 0.01, 
-    .integralThreshold = 1, 
+    .p = 6.3,
+    .i = 0.43,
+    .d = 59,
+    .tolerance = 0.01,
+    .integralThreshold = 1,
     .maxIntegral = 100
-}; 
+};
 
 
 pidConstants _90 {
-    .p = 6.3, 
-    .i = 0.43, 
-    .d = 59, 
-    .tolerance = 0.01, 
-    .integralThreshold = 1, 
+    .p = 6.3,
+    .i = 0.43,
+    .d = 59,
+    .tolerance = 0.01,
+    .integralThreshold = 1,
     .maxIntegral = 100
-}; 
+};
 
 pidConstants _45 {
-    .p = 4.9, 
-    .i = 0.4, 
-    .d = 26, 
-    .tolerance = 0.01, 
-    .integralThreshold = 1.1, 
+    .p = 4.9,
+    .i = 0.4,
+    .d = 26,
+    .tolerance = 0.01,
+    .integralThreshold = 1.1,
     .maxIntegral = 100
-}; 
+};
 
 pidConstants _30 {
-    .p = 5.9, 
-    .i = 0.6, 
-    .d = 70, 
-    .tolerance = 0.05, 
-    .integralThreshold = 1.1, 
+    .p = 5.9,
+    .i = 0.6,
+    .d = 70,
+    .tolerance = 0.05,
+    .integralThreshold = 1.1,
     .maxIntegral = 20
-}; 
+};
 
 pidConstants _15 {
-    .p = 4.9, 
-    .i = 0.4, 
-    .d = 26, 
-    .tolerance = 0.01, 
-    .integralThreshold = 1.1, 
+    .p = 4.9,
+    .i = 0.4,
+    .d = 26,
+    .tolerance = 0.01,
+    .integralThreshold = 1.1,
     .maxIntegral = 100
-}; 
+};
 
 pidConstants _5 {
-    .p = 4.9, 
-    .i = 0.4, 
-    .d = 26, 
-    .tolerance = 0.01, 
-    .integralThreshold = 1.1, 
+    .p = 4.9,
+    .i = 0.4,
+    .d = 26,
+    .tolerance = 0.01,
+    .integralThreshold = 1.1,
     .maxIntegral = 100
-}; 
+};
 
 pidConstants _arc {
     .p = 1.7,
