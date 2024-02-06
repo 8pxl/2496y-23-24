@@ -18,21 +18,21 @@ namespace cata {
         delayed,
         off
     };
-    
+
     cataState state = idle;
     lib::pid pid({
         .p = 2.2,
-        .i = 0.4, 
-        .d = 0, 
-        .tolerance = 0.05, 
-        .integralThreshold = 15, 
+        .i = 0.4,
+        .d = 0,
+        .tolerance = 0.05,
+        .integralThreshold = 15,
         .maxIntegral = 20
     }, 0);
     lib::timer delay;
-    lib::timer inRange; 
+    lib::timer inRange;
     double target = load;
 
-    void cataControl() {    
+    void cataControl() {
         // std::cout << limit.get_value() << std::endl;
         double angle = rot.get_angle();
         double error = lib::minError(target/100.0, angle/100.0);
@@ -43,7 +43,7 @@ namespace cata {
                 if (inRange.time() > 375) {
                     state = off;
                 }
-                robot::cata.spin(-127);
+                robot::cata.spin(-117);
                 break;
 
             case reloading:
@@ -77,10 +77,10 @@ namespace cata {
                 }
                 break;
 
-            case toggeled: 
-                robot::cata.spin(-107);
+            case toggeled:
+                robot::cata.spin(-127);
                 break;
-                
+
             case off:
                 robot::cata.stop('c');
                 break;
