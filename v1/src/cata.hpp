@@ -43,7 +43,7 @@ namespace cata {
                 if (inRange.time() > 375) {
                     state = off;
                 }
-                robot::cata.spin(-117);
+                robot::cata.spin(-127);
                 break;
 
             case reloading:
@@ -78,7 +78,7 @@ namespace cata {
                 break;
 
             case toggeled:
-                robot::cata.spin(-127);
+                robot::cata.spin(-108);
                 break;
 
             case off:
