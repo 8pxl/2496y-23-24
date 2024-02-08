@@ -600,7 +600,7 @@ void safe_far() {
   robot::blocker.spin(0);
   chass.timedDrive(1000, -127);
 }
-void skills() {}
+
 void calcTrack() {
   double dl = 0;
   double dr = 0;
@@ -769,8 +769,7 @@ void test3() {
   chass.profiledDrive(20, 0, 0, 0);
 }
 
-lib::atns autons = {{skills, new_far, wp_near, wp_far, test2, new_near,
-                     rush_near, rush_far, no_matchload, new_skills, tank},
-                    {"skills", "new_far", "wp_near", "wp_far", "test2",
-                     "new_near", "rush_near", "rush_far", "no_matchload",
-                     "new_skills", "tank"}};
+lib::atns autons = {{skills, wp_near, wp_far, test2,
+                     rush_near, rush_far, no_matchload, tank},
+                    {"skills", "wp_near", "wp_far", "test2",
+                      "rush_near", "rush_far", "no_matchload", "tank"}};
