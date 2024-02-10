@@ -36,7 +36,7 @@ void far_half() {
     cata::fire();
 
     // - first side push
-    robot::intake.spin(127);
+    robot::intake.spin(-127);
     // chass.pidTurn(183, 450, _90);
     glb::vpis1.set_value(true);
     chass.driveAngle(2100, 153, 720, _lin, _ang);
@@ -47,6 +47,10 @@ void far_half() {
     // chass.timedDrive(500, -127);
     glb::vpis1.set_value(false);
 
+    chass.driveAngle(-3000, 94, 300, _lin, _ang);
+    chass.driveAngle(8000, 94, 500, _lin, _ang);
+
+    /*
     // - drive out
     chass.driveAngle(-400, 127, 260, _lin, _angBig);
     chass.driveAngle(-1300, 127, 450, _lin, _ang);
@@ -62,7 +66,7 @@ void far_half() {
     chass.driveAngle(5000, 93, 400, _lin, _ang);
     // chass.driveAngle(-5000, 100, 700, _lin, _ang);
     glb::vpis1.set_value(false);
-
+    */
 
     // - reallign balls on the side
 
@@ -122,8 +126,8 @@ void far_half() {
     */
 
     // - push #2
-    robot::intake.spin(127);
     chass.driveAngle(-500, 177, 159, _lin, _angBig);
+    robot::intake.spin(127);
     chass.driveAngle(-900, 177, 230, _lin, _angBig);
     chass.arcTurn(100, 5.7, 370, -1, _arc, 30);
     chass.driveAngle(1070, 100, 520, _lin, _ang);
@@ -255,12 +259,13 @@ void far_half() {
     // chass.driveAngle(-5000, 100, 700, _lin, _ang);
     glb::vpis2.set_value(false);
 
+    // hang
     chass.driveAngle(-400, neg(137), 300, _lin, _angBig);
     robot::blocker.spin(100);
-    chass.driveAngle(-1700, neg(137), 600, _lin, _ang);
-    chass.pidTurn(neg(1.5), 430, _90);
+    chass.driveAngle(-1600, neg(137), 600, _lin, _ang);
+    chass.pidTurn(neg(1.3), 490, _90);
     robot::blocker.spin(10);
-    chass.driveAngle(2500, neg(1.5), 860, _lin, _ang);
+    chass.driveAngle(2500, neg(1.3), 860, _lin, _ang);
     robot::blocker.stop('c');
     robot::pto.toggle();
     chass.timedDrive(1000, 110);

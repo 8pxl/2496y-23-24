@@ -8,14 +8,14 @@ int lib::controller::select(std::vector<std::string> names)
     int curr = 0;
     cont -> clear();
     while(1)
-    {   
+    {
         if(cont -> get_digital_new_press(pros::E_CONTROLLER_DIGITAL_RIGHT))
         {
             if (curr != num-1)
             {
                 curr++;
             }
-            
+
             else
             {
                 curr = 0;
@@ -58,17 +58,17 @@ std::vector<bool> lib::controller::getAll(std::vector<pros::controller_digital_e
 }
 
 //https://www.desmos.com/calculator/puepnlubzh
-double lib::controller::curve(double x, double scale) 
+double lib::controller::curve(double x, double scale)
 {
-    if (scale != 0) 
+    if (scale != 0)
     {
-        return(pow(2.718, (scale * ((std::fabs(x) - 127))) / 1000 ) * x); 
+        return(pow(2.718, (scale * ((std::fabs(x) - 127))) / 1000 ) * x);
     }
     return x;
 }
 
 std::vector<double> lib::controller::drive(int direction, driveMode mode)
-{   
+{
     double lStick = curve(cont -> get_analog(ANALOG_LEFT_Y) * direction, leftCurve);
     double rStick;
     switch(mode)
@@ -76,7 +76,7 @@ std::vector<double> lib::controller::drive(int direction, driveMode mode)
         case arcade:
             rStick = curve(cont ->get_analog(ANALOG_RIGHT_X), rightCurve);
             return(std::vector<double>{lStick + rStick, lStick - rStick});
-        
+
         case tank:
             rStick = curve(cont -> get_analog(ANALOG_RIGHT_Y), rightCurve);
             return(std::vector<double>{lStick, rStick});

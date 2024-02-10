@@ -30,7 +30,7 @@ void driver() {
             robot::intake.stop('c');
         }
     }
-    
+
     else {
         // if (state[L1]) glb::spis.set_value(true);
         // else glb::spis.set_value(false);
@@ -46,7 +46,7 @@ void driver() {
         if (state[X]) {
             bHold = 'c';
         }
-        // if (state[UP]) robot::cata.spin(-127); 
+        // if (state[UP]) robot::cata.spin(-127);
         else if (cata::state == cata::cataState::idle) robot::cata.spin(0);
 
         if(state[NY]) robot::pto.toggle();
@@ -70,19 +70,16 @@ void driver() {
     if(!state[L1]) robot::vwings.setState(false);
 
     if(state[NRIGHT]) glb::imu.reset();
-    
+
     if (state[NLEFT]) {
-        chass.profiledDrive(6, 0,0,0);
+        robot::intake.spin(-127);
+        chass.profiledDrive(7.2, 0,0,0);
         robot::chassMtrs.stop('b');
         pros::delay(200);
-        // // robot::scraper.toggle();
-        // // robot::blocker.spin(-50);
-        // // chass.pidTurn(neg(22.6), 900, _15);
-        chass.pidTurn(neg(152.1), 800, _90);
+        chass.pidTurn(neg(153.4), 800, _90);
         // // robot::scraper.toggle();
         // // robot::blocker.spin(0);
-        // chass.profiledDrive(-3.7, 0);
+        chass.profiledDrive(-3.7, 0);
     }
-    // cata::cataControl();
     pros::delay(20);
 }

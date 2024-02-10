@@ -8,10 +8,8 @@ void (*auton)();
 
 void initialize() {
 	glb::imu.reset();
-	// glb::async.init();
-	// init();
 	cata::init();
-	auton = autons.autonsList[robot::controller.select(autons.names)];	
+	auton = autons.autonsList[robot::controller.select(autons.names)];
 }
 
 void autonomous() {auton(); robot::chassMtrs.stop('c');}
