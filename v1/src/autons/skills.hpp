@@ -23,7 +23,7 @@ void pre_matchload() {
 void matchload() {
     cata::toggle();
     lib::timer t1;
-    while (t1.time() < 24000) {
+    while (t1.time() < 22000) {
         chass.pidTurn(neg(153.4), 300, _15);
         pros::delay(20);
         // robot::cata.spin(-104);
@@ -122,21 +122,23 @@ void far_half() {
     glb::vpis2.set_value(true);
     chass.driveAngle(1500, 176, 300, _lin, _ang);
     chass.timedDrive(500, 90);
-    glb::vpis2.set_value(false);
+    glb::vpis2.set_value(falsyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy7e);
     */
 
     // - push #2
     chass.driveAngle(-500, 177, 159, _lin, _angBig);
     robot::intake.spin(127);
-    chass.driveAngle(-900, 177, 230, _lin, _angBig);
+    chass.driveAngle(-1000, 177, 230, _lin, _angBig);
     chass.arcTurn(100, 5.7, 370, -1, _arc, 30);
-    chass.driveAngle(1070, 100, 520, _lin, _ang);
+    chass.driveAngle(1000, 100, 520, _lin, _ang);
     chass.pidTurn(181.7, 330, _90);
     robot::vwings.toggle();
     // glb::vpis2.set_value(true);
     robot::intake.spin(-127);
     chass.driveAngle(1500, 181.7, 300, _lin, _ang);
     chass.timedDrive(740, 90);
+    // chass.driveAngle(-400, 181.7, 200, _lin, _ang);
+    // chass.timedDrive(120, 127);
     robot::vwings.toggle();
     // glb::vpis2.set_value(false);
 
@@ -233,7 +235,7 @@ void far_half() {
 
     chass.pidTurn(90, 340, _90);
     chass.driveAngle(800, 90, 360, _lin, _angBig);
-    chass.pidTurn(neg(174), 470, _90);
+    chass.pidTurn(neg(172), 470, _90);
     glb::vpis2.set_value(true);
     chass.driveAngle(1770, neg(153), 620, _lin, _ang);
     chass.driveAngle(1000, neg(100), 300, _lin, _ang);
@@ -262,7 +264,7 @@ void far_half() {
     // hang
     chass.driveAngle(-400, neg(137), 300, _lin, _angBig);
     robot::blocker.spin(100);
-    chass.driveAngle(-1600, neg(137), 600, _lin, _ang);
+    chass.driveAngle(-1760, neg(137), 600, _lin, _ang);
     chass.pidTurn(neg(1.3), 490, _90);
     robot::blocker.spin(10);
     chass.driveAngle(2500, neg(1.3), 860, _lin, _ang);
