@@ -62,6 +62,7 @@ void driver() {
     if (cata::state == cata::toggeled) {
         robot::wings.setState(true);
         robot::chassMtrs.setBrake('b');
+        chass.pidTurn(neg(153.4), 300, _90);
     }
     else if(!state[L1]) {
         robot::chassMtrs.setBrake('c');
@@ -77,9 +78,8 @@ void driver() {
         robot::chassMtrs.stop('b');
         pros::delay(200);
         chass.pidTurn(neg(153.4), 800, _90);
-        // // robot::scraper.toggle();
-        // // robot::blocker.spin(0);
         chass.profiledDrive(-3.7, 0);
+        cata::toggle();
     }
     pros::delay(20);
 }

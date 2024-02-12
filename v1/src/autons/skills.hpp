@@ -2,12 +2,12 @@
 #define tr(x) 180 + (180 - x)
 
 void pre_matchload() {
-    // glb::vpis1.set_value(true);
+    glb::vpis1.set_value(true);
     // pros::delay(250);
-    // glb::vpis1.set_value(false);
     // pros::delay(250);
     robot::intake.spin(-127);
     chass.profiledDrive(7.2, 0,0,0);
+    glb::vpis1.set_value(false);
     robot::chassMtrs.stop('b');
     pros::delay(200);
     chass.pidTurn(neg(153.4), 800, _90);
@@ -221,8 +221,8 @@ void far_half() {
     // chass.driveAngle(3200, 94, 1180, _lin, _ang);
     chass.driveAngle(-600, neg(170), 300, _lin, _angBig);
     robot::vwings.toggle();
-    chass.pidTurn(100, 400, _90);
-    chass.driveAngle(1500, 100, 500, _lin, _ang);
+    chass.pidTurn(105, 400, _90);
+    chass.driveAngle(1500, 105, 500, _lin, _ang);
     // chass.driveAngle(400, 100, 300, _lin, _ang);
     chass.driveAngle(2000, 83, 200, _lin, _angBig);
     chass.driveAngle(2000, 83, 400, _lin, _ang);
@@ -246,7 +246,7 @@ void far_half() {
     // - drive out
     chass.driveAngle(-400, neg(127), 260, _lin, _angBig);
     chass.driveAngle(-1300, neg(127), 450, _lin, _ang);
-    chass.driveAngle(-1300, neg(160), 460, _lin, _ang);
+    chass.driveAngle(-1270, neg(160), 460, _lin, _ang);
 
     // - second side push
     chass.pidTurn(neg(174), 190, _90);
@@ -262,9 +262,9 @@ void far_half() {
     glb::vpis2.set_value(false);
 
     // hang
-    chass.driveAngle(-400, neg(137), 300, _lin, _angBig);
+    chass.driveAngle(-580, neg(137), 300, _lin, _angBig);
     robot::blocker.spin(100);
-    chass.driveAngle(-1760, neg(137), 600, _lin, _ang);
+    chass.driveAngle(-1839, neg(137), 600, _lin, _ang);
     chass.pidTurn(neg(1.3), 490, _90);
     robot::blocker.spin(10);
     chass.driveAngle(2500, neg(1.3), 860, _lin, _ang);
@@ -301,7 +301,7 @@ void post_matchload() {
     robot::intake.spin(127);
     chass.driveAngle(1800, neg(19), 500, _lin, _ang);
     chass.driveAngle(1260, neg(97), 600, _lin, _angBig);
-    chass.driveAngle(1450, neg(135), 560, _lin, _ang);
+    chass.driveAngle(1200, neg(135), 560, _lin, _ang);
     chass.driveAngle(900, 183, 200, _lin, _angBig);
     chass.driveAngle(900, 185, 300, _lin, _ang);
 
