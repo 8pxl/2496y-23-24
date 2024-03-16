@@ -3,6 +3,7 @@
 #include <cmath>
 #include <vector>
 #include <set>
+#include "keejLib/groups.h"
 #include "main.h"
 
 #define PI 3.14159265358979323846
@@ -133,4 +134,5 @@ namespace lib
     // double hypot(lib::point a);
     double dist(const point& a, const point& b);
     double absoluteAngleToPoint(const point& pos, const point& point);
+    void motorMedic(mtrs& motors, int voltage, std::vector<int> indexes);
 }

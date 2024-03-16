@@ -26,6 +26,12 @@ void lib::mtrs::spin(double volts)
     }
 }
 
+void lib::mtrs::spin(int index, int volts)
+{
+    motors[index].move(volts);
+}
+
+
 void lib::mtrs::stop(char brakeMode) 
 {
     pros::motor_brake_mode_e brakeType = returnBrakeType(brakeMode);
@@ -47,6 +53,14 @@ void lib::mtrs::setBrake(char brakeMode)
     }
 }
 
+int lib::mtrs::getPort(int index) {
+    return motors[index].get_port();
+}
+
+double lib::mtrs::getSpeed(int index) {
+    return motors[index].get_actual_velocity();
+}
+
 double lib::mtrs::getSpeed() 
 {
     double vel = 0;
@@ -58,6 +72,7 @@ double lib::mtrs::getSpeed()
     
     return(vel/size);
 }
+
 
 double lib::mtrs::getRotation() 
 {

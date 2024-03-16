@@ -19,6 +19,8 @@ namespace lib
             void stop(char brakeMode);
             void setBrake(char brakeMode);
             void reset();
+            int getPort(int index);
+            double getSpeed(int index);
             double getSpeed();
             double getRotation();
             double getEfficiency();

@@ -1,7 +1,7 @@
 #pragma once
 #include "../include/keejLib/lib.h"
 
-void lib::chassis::driveAngle(double target, double heading, double timeout, lib::pidConstants lCons, lib::pidConstants acons)
+void lib::chassis::driveAngle(double target, double heading, double timeout, lib::pidConstants lCons, lib::pidConstants acons, bool reset = true)
 {
   lib::timer timer;
 
@@ -9,8 +9,9 @@ void lib::chassis::driveAngle(double target, double heading, double timeout, lib
   double sgn = sign(target);
   lib::pid linearController(lCons, target);
   lib::pid angularController(acons,0);
-
-  chass -> reset();
+  if (reset) {
+    chass -> reset();
+  }
 
   while (timer.time() <= timeout)
   {

@@ -45,7 +45,7 @@ namespace lib
 
 
             //2dpid
-            void driveAngle(double target, double heading, double timeout, lib::pidConstants lCons, lib::pidConstants acons);
+            void driveAngle(double target, double heading, double timeout, lib::pidConstants lCons, lib::pidConstants acons, bool reset);
             std::vector<double> pidMTPVel(const point& target, double rotationBias, lib::pid* lCont, lib::pid* rCont);
             void pidMoveTo(const point& target, double timeout, lib::pidConstants lConstants, lib::pidConstants 
             rConstants, double rotationBias);
