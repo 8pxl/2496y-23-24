@@ -8,7 +8,7 @@ void pre_matchload() {
     chass.profiledDrive(7.2, 0,0,0);
     robot::chassMtrs.stop('b');
     pros::delay(200);
-    chass.pidTurn(neg(153.4), 800, _90);
+    chass.pidTurn(neg(153), 800, _90);
     // // robot::scraper.toggle();
     // // robot::blocker.spin(0);
     chass.profiledDrive(-3.7, 0);
@@ -134,8 +134,8 @@ void far_half() {
     robot::intake.spin(127);
     chass.driveAngle(900, neg(3), 380, _lin, _angBig);
     chass.arcTurn(280, 8.8, 510, 1, _arc, 30);
-    chass.driveAngle(-1000, 280, 460, _lin, _ang);
-    chass.pidTurn(0, 400, _90);
+    chass.driveAngle(-770, 280, 490, _lin, _ang);
+    chass.pidTurn(0, 500, _90);
     robot::vwings.setState(true);
     // glb::lhoriz.set_value(true);
     robot::intake.spin(-127);

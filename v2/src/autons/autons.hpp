@@ -18,19 +18,19 @@ void touch_near() {
   glb::lhoriz.set_value(true);
   chass.driveAngle(1200, 0, 600, _lin, _ang);
   glb::lhoriz.set_value(false);
-  chass.driveAngle(-3000, neg(55), 1200, _lin, _ang);
+  chass.driveAngle(-2930, neg(55), 1300, _lin, _ang);
   chass.driveAngle(-500, 45, 500, _lin, _ang);
   glb::lvert.set_value(true);
   pros::delay(100);
   chass.pidTurn(neg(30), 400, _45);
   glb::lvert.set_value(false);
-  chass.pidTurn(22, 500, _15);
+  chass.pidTurn(30, 500, _15);
   robot::intake.spin(-127);
   pros::delay(200);
   // robot::wings.setState(true);
   glb::rhoriz.set_value(true);
   // chass.driveAngle(1200, 45, 800, _lin, _ang);
-  chass.driveAngle(2200, 0, 900, _lin, _ang);
+  chass.driveAngle(2040, 0, 1300, _lin, _ang);
 }
 
 void greedy_near() {
@@ -43,7 +43,7 @@ void rush_far() {
   robot::intake.spin(127);
   chass.driveAngle(2700, 80, 300, _lin, _ang);
   wings.toggle();
-  chass.driveAngle(2700, 80, 600, _lin, _ang, false);
+  chass.driveAngle(2700, 80, 780, _lin, _ang, false);
   chass.driveAngle(-900, 79, 820, _lin, _ang, false);
   chass.pidTurn(150, 200, _90);
   robot::intake.spin(-127);
@@ -70,7 +70,7 @@ void rush_far() {
   robot::intake.spin(-127);
   pros::delay(100);
   chass.driveAngle(3000, 100, 600, _lin, _ang);
-  chass.driveAngle(-600, 100, 300, _lin, _ang);
+  chass.driveAngle(-650, 100, 300, _lin, _ang);
   robot::wings.setState(false);
   chass.pidTurn(29, 350, _45);
   robot::intake.spin(127);
@@ -79,11 +79,11 @@ void rush_far() {
   chass.driveAngle(2400, 150, 200, _lin, _ang);
   robot::intake.spin(-127);
   chass.driveAngle(2400, 180, 500, _lin, _ang, false);
-  chass.driveAngle(-980, 180, 400, _lin, _ang);
+  chass.driveAngle(-980, 170, 400, _lin, _ang);
   robot::intake.spin(127);
   chass.pidTurn(24, 500, _180);
-  chass.driveAngle(800, 24, 300, _lin, _ang);
-  chass.driveAngle(-800, 24, 300, _lin, _ang);
+  chass.driveAngle(800, 24, 400, _lin, _ang);
+  chass.driveAngle(-800, 24, 400, _lin, _ang);
   chass.pidTurn(170, 500, _90);
   robot::intake.spin(-127);
   robot::wings.toggle();
@@ -147,13 +147,13 @@ void safe_near() {
   pros::delay(100);
   chass.pidTurn(neg(30), 400, _45);
   glb::lvert.set_value(false);
-  chass.pidTurn(38, 500, _15);
+  chass.pidTurn(39, 500, _15);
   robot::intake.spin(-127);
+  glb::rhoriz.set_value(true);
   pros::delay(200);
   // robot::wings.setState(true);
-  glb::rhoriz.set_value(true);
   // chass.driveAngle(1200, 45, 800, _lin, _ang);
-  chass.driveAngle(2300, 0, 900, _lin, _ang);
+  chass.driveAngle(2100, 0, 1500, _lin, _ang);
 }
 
 void greedy_far() {
