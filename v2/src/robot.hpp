@@ -12,9 +12,9 @@ pros::Imu imu(6);
 pros::ADIDigitalOut rhoriz('G');
 pros::ADIDigitalOut lhoriz('H');
 pros::ADIDigitalOut spis('A');
-pros::ADIDigitalOut lvert('D');
+pros::ADIDigitalOut lvert('E');
 pros::ADIDigitalOut rvert('C');
-pros::ADIDigitalOut pto('E');
+pros::ADIDigitalOut pto('A');
 pros::ADIDigitalOut hang('F');
 pros::ADIButton limit(-1);
 pros::Controller controller(pros::E_CONTROLLER_MASTER);
@@ -26,7 +26,7 @@ lib::scheduler async;
 // math for robot constants
 namespace robot {
     lib::diffy chassMtrs({-20, -18, -17, 11, 13, 14});
-    lib::mtrs intake({-7});
+    lib::mtrs intake({7});
     lib::mtrs tsukasa({-1});
     lib::mtrs cata({-9});
     lib::pis wings({glb::lhoriz, glb::rhoriz}, false);
