@@ -1,4 +1,5 @@
 #include "main.h"
+#include "pros/misc.h"
 #include "robot.hpp"
 #include "controls.hpp"
 #include "cata.hpp"
@@ -20,6 +21,10 @@ void opcontrol() {
 	while (true) {
 		driver();
 		if (glb::controller.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN)) auton();
+		if (glb::controller.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
+		    glb::imu.reset();
+		    auton = autons.autonsList[robot::controller.select(autons.names)];
+		}
 		if(auton == tank) robot::chassMtrs.spinDiffy(robot::controller.drive(1, lib::controller::tank));
 		else robot::chassMtrs.spinDiffy(robot::controller.drive(1, lib::controller::arcade));
 	}

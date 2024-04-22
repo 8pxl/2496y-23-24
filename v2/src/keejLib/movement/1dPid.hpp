@@ -11,13 +11,18 @@ lib::pid lib::chassis::pidDrive(double target, double timeout, lib::pidConstants
   return (pidController);
 }
 
-lib::pid lib::chassis::pidTurn(double target, double timeout, lib::pidConstants constants, char brake = 'b')
+lib::pid lib::chassis::pidTurn(double target, double timeout, lib::pidConstants constants, double slew = -1, char brake = 'b')
 {
   lib::timer timer;
   lib::pid pidController(constants, target);
+  double prev = 0;
   while(timer.time() < timeout)
   {
     double vel = pidController.out(lib::minError(target, imu -> get_heading()));
+    if (std::abs(vel - prev) > slew && slew != -1) {
+        vel = prev + (sign(vel - prev) * slew);
+    }
+    prev = vel;
     chass -> spinDiffy(-vel, vel);
     pros::delay(10);
   }

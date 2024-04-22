@@ -76,6 +76,15 @@ pidConstants _arc {
     .maxIntegral = 100
 };
 
+pidConstants _arcSlow {
+    .p = 1.2,
+    .i = 0.2,
+    .d = 2,
+    .tolerance = 0,
+    .integralThreshold = 3,
+    .maxIntegral = 100
+};
+
 pidConstants _eul {
     .p = 1,
     .i = 0,
@@ -99,7 +108,7 @@ pidConstants _lin {
     .p = 0.13,
     .i = 0,
     .d = 0,
-    .tolerance = 0,
+    .tolerance = 40,
     .integralThreshold = 0,
     .maxIntegral = 0
 };

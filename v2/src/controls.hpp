@@ -54,6 +54,7 @@ void driver() {
         }
 
         if(state[NY]) robot::pto.toggle();
+        if(state[NX]) robot::boost.toggle();
         if(state[NA]) robot::hang.toggle();
     }
     if (closeWings) {

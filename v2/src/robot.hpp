@@ -16,6 +16,7 @@ pros::ADIDigitalOut lvert('E');
 pros::ADIDigitalOut rvert('C');
 pros::ADIDigitalOut pto('A');
 pros::ADIDigitalOut hang('F');
+pros::ADIDigitalOut boost('B');
 pros::ADIButton limit(-1);
 pros::Controller controller(pros::E_CONTROLLER_MASTER);
 pros::Rotation rot(3);
@@ -32,6 +33,7 @@ namespace robot {
     lib::pis wings({glb::lhoriz, glb::rhoriz}, false);
     lib::pis vwings({glb::lvert, glb::rvert}, false);
     lib::pis pto({glb::pto}, false);
+    lib::pis boost({glb::boost}, false);
     lib::pis hang({glb::hang}, false);
     lib::controller controller(glb::controller);
     lib::chassis chass(chassMtrs, glb::imu, {-1, -1},

@@ -28,7 +28,7 @@ namespace lib
 
             //1dpid
             lib::pid pidDrive(double target, double timeout, lib::pidConstants constants, char brake);
-            lib::pid pidTurn(double target, double timeout, lib::pidConstants constants, char brake);
+            lib::pid pidTurn(double target, double timeout, lib::pidConstants constants, double slew, char brake);
             lib::pid pidDrive(double target, double timeout, char brake, lib::pid cont);
             lib::pid pidTurn(double target, double timeout, char brake, lib::pid cont);
             // lib::pid keejTurn(double target, int timeout, lib::pidConstants constants, char brake);
@@ -45,7 +45,7 @@ namespace lib
 
 
             //2dpid
-            void driveAngle(double target, double heading, double timeout, lib::pidConstants lCons, lib::pidConstants acons, bool reset);
+            void driveAngle(double target, double heading, double timeout, lib::pidConstants lCons, lib::pidConstants acons, bool reset, double rushError, double slew);
             std::vector<double> pidMTPVel(const point& target, double rotationBias, lib::pid* lCont, lib::pid* rCont);
             void pidMoveTo(const point& target, double timeout, lib::pidConstants lConstants, lib::pidConstants 
             rConstants, double rotationBias);
