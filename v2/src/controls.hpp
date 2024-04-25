@@ -73,7 +73,7 @@ void driver() {
         chass.profiledDrive(7.2, 0,0,0);
         robot::chassMtrs.stop('b');
         pros::delay(200);
-        chass.pidTurn(neg(153), 800, _90);
+        chass.pidTurn(neg(151), 800, _90);
         chass.profiledDrive(-3.7, 0);
         robot::cata.spin(127);
         toggeled = true;

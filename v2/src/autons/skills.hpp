@@ -125,8 +125,8 @@ void far_half() {
     chass.driveAngle(1500, neg(18), 500, _lin, _ang);
     chass.pidTurn(90, 300, _90);
     robot::intake.spin(-127);
-    chass.driveAngle(1300, 90, 540, _lin, _ang);
-    chass.driveAngle(400, 90, 310, _lin, _ang, false);
+    chass.driveAngle(1500, 90, 540, _lin, _ang);
+    chass.driveAngle(600, 90, 310, _lin, _ang, false);
     // chass.pidTurn(180, 300, _90);
     // chass.driveAngle(600, 180, 300, _lin, _ang);
 
@@ -167,7 +167,7 @@ void far_half() {
     chass.arcTurn(neg(100), 10, 560, 1, _arc, 30);
     chass.driveAngle(-1450, neg(98), 300, _lin, _angBig);
     robot::vwings.setState(true);
-    chass.driveAngle(-1450, neg(98), 300, _lin, _angBig, false);
+    chass.driveAngle(-1450, neg(98), 400, _lin, _angBig, false);
     chass.pidTurn(neg(2), 500, _90);
     // robot::vwings.setState(true);
     // glb::lhoriz.set_value(true);
@@ -209,10 +209,10 @@ void far_half() {
     // - get balls from corner
     chass.driveAngle(300, neg(15), 200, _lin, _angBig);
     robot::intake.spin(127);
-    chass.driveAngle(1600, neg(15), 600, _lin, _ang);
+    chass.driveAngle(1300, neg(15), 550, _lin, _ang);
     chass.arcTurn(260, 5.9, 300, 1, _arc, 20);
     // chass.driveAngle(-1460, neg(97), 700, _lin, _ang);
-    chass.driveAngle(-3480, 260, 940, _lin, _angBig);
+    chass.driveAngle(-4000, 260, 940, _lin, _angBig);
     // glb::wpis2.set_value(true);
 
     // robot::wings.toggle();
