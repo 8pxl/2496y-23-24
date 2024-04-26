@@ -31,9 +31,15 @@ void driver() {
     closeWings = true;
     std::vector<bool> state = robot::controller.getAll(ALLBUTTONS);
     if (state[L2]) {
-        if (state[L1])  robot::vwings.setState(true);
+        if (state[L1])  {
+            robot::vwings.setState(true);
+            closeWings = false;
+        }
+        else {
+            closeWings = true;
+        }
         if (state[R2])  {
-            robot::wings.setState(true);
+            robot::vwings.setState(true);
             closeWings = false;
         }
         if (state[R1])  {
@@ -44,21 +50,31 @@ void driver() {
     }
     else {
         if (state[R1]) robot::intake.spin(127);
+        else if (!toggeled) {
+            robot::cata.spin(0);
+        }
 
         if (state[L1]) {
             robot::wings.setState(true);
-            closeWings = false;
         }
         else {
-            robot::vwings.setState(false);
+            robot::wings.setState(false);
         }
 
-        if(state[NY]) robot::pto.toggle();
+        if(state[NY]) robot::pto.setState(true);
+        if(state[NB]) { 
+            toggeled = !toggeled;
+            robot::cata.spin(127);
+        }
+        if(state[NA]) {
+            robot::pto.setState(false);
+            robot::boost.setState(false);
+        }
         if(state[NX]) robot::boost.toggle();
-        if(state[NA]) robot::hang.toggle();
+        if(state[NUP]) robot::hang.toggle();
     }
     if (closeWings) {
-        robot::wings.setState(false);
+        robot::vwings.setState(false);
     }
 
     if (state[R2]) {
@@ -73,7 +89,7 @@ void driver() {
         chass.profiledDrive(7.2, 0,0,0);
         robot::chassMtrs.stop('b');
         pros::delay(200);
-        chass.pidTurn(neg(151), 800, _90);
+        chass.pidTurn(neg(152), 800, _90);
         chass.profiledDrive(-3.7, 0);
         robot::cata.spin(127);
         toggeled = true;

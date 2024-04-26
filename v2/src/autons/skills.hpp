@@ -25,7 +25,7 @@ void matchload() {
     lib::timer t1;
     // glb::lvert.set_value(true);
     robot::cata.spin(127);
-    while (t1.time() < 22000) {
+    while (t1.time() < 24000) {
         chass.pidTurn(neg(151), 300, _15);
         pros::delay(20);
     }
@@ -164,7 +164,8 @@ void far_half() {
     // chass.driveAngle(-500, 177, 159, _lin, _angBig);
     robot::intake.spin(127);
     chass.driveAngle(1600, neg(20), 550, _lin, _angBig);
-    chass.arcTurn(neg(100), 10, 560, 1, _arc, 30);
+    chass.driveAngle(800, neg(100), 550, _lin, _angBig);
+    // chass.arcTurn(neg(100), 10, 560, 1, _arc, 30);
     chass.driveAngle(-1450, neg(98), 300, _lin, _angBig);
     robot::vwings.setState(true);
     chass.driveAngle(-1450, neg(98), 400, _lin, _angBig, false);
