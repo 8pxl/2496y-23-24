@@ -66,7 +66,7 @@ void driver() {
             toggeled = !toggeled;
             robot::cata.spin(127);
         }
-        if(state[NA]) {
+        if(state[NA]) { 
             robot::pto.setState(false);
             robot::boost.setState(false);
         }

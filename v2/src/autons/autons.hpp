@@ -184,7 +184,7 @@ void safe_far() {
   // chass.driveAngle(600, 90, 600, _lin, _ang);
   // chass.driveAngle(-800, 90, 400, _lin, _ang);
   
-  chass.arcTurn(90, 7.5, 500, 1, _arc, 0, 0);
+  chass.arcTurn(90, 7.1, 500, 1, _arc, 0, 0);
   intake.spin(-127);
   pros::delay(160);
   chass.timedDrive(600, 127);
@@ -192,6 +192,8 @@ void safe_far() {
   pros::delay(300);
   chass.timedDrive(600, 127);
   glb::lhoriz.set_value(false);
+  
+  /*  OLD
   chass.driveAngle(-600, 110, 300, _lin, _ang);
   chass.driveAngle(-1100, 135, 500, _lin, _ang, false);
   chass.pidTurn(19, 600, _90);
@@ -215,13 +217,42 @@ chass.driveAngle(2830, 19, 1250, _lin, _ang);
   robot::intake.spin(-127);
   chass.driveAngle(2400, 190, 600, _lin, _ang, false);
   // robot::intake.spin(-127);
-  chass.driveAngle(-600, 190, 400, _lin, _ang);
-  chass.driveAngle(1300, 190, 400, _lin, _ang);
+  */
+  
+  //new
+  
+  chass.driveAngle(-650, 100, 300, _lin, _ang);
+  robot::wings.setState(false);
+  chass.pidTurn(29, 330, _45);
+  robot::intake.spin(127);
+  chass.driveAngle(2810, 29, 1100, _lin, _ang);
+  chass.pidTurn(140, 490, _90);
+  chass.driveAngle(900, 140, 300, _lin, _ang);
+  robot::intake.spin(-127);
   robot::wings.toggle();
+  chass.driveAngle(2400, 180, 590, _lin, _ang, false);
+  robot::wings.toggle();
+  chass.driveAngle(-980, 170, 350, _lin, _ang);
+  robot::intake.spin(127);
+  chass.pidTurn(24, 480, _180);
+  chass.driveAngle(1000, 24, 400, _lin, _ang);
+  chass.driveAngle(-800, 24, 400, _lin, _ang);
+  robot::intake.spin(0);
+  chass.pidTurn(170, 500, _90);
+  robot::intake.spin(-127);
+  robot::wings.toggle();
+  chass.driveAngle(2000, 180, 150, _lin, _ang);
+  robot::intake.spin(-127);
+  chass.driveAngle(2400, 180, 500, _lin, _ang, false);
+  //end new
+  chass.driveAngle(-600, 190, 400, _lin, _ang);
+  robot::wings.toggle();
+  chass.driveAngle(1300, 190, 400, _lin, _ang);
   chass.driveAngle(-2000, 190, 500, _lin, _ang);
   chass.pidTurn(neg(80), 400, _90);
   chass.driveAngle(1800, neg(84), 800, _lin, _ang);
-  chass.timedDrive(600, 40);
+  chass.timedDrive(700, 26);
+  robot::wings.toggle();
 }
 
 void center_near() {
